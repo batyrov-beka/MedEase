@@ -1,0 +1,164 @@
+
+{% load static %}
+
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>MedEase — Онлайн медицина</title>
+     <link rel="stylesheet" href="{% static 'css/woman/index.css' %}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="light">
+<section class="header-fa">
+    <div class="container">
+        <div class="container-content">
+
+
+            <button class="burger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+
+            <h2 class="site-title">
+                <i class="fas fa-heartbeat"></i> Медицина
+            </h2>
+
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+
+
+            <nav class="desktop-nav">
+                <a href="/">Главная</a>
+                <a href="{% url 'profile' %}">Профиль</a>
+               <a href="{% url 'doctors:doctor_list' %}">Врачи</a>
+                <a href="{% url 'about' %}">Расписание</a>
+                <a href="{% url 'appointments:my' %}">Запись</a>
+{% if user.is_authenticated and user.doctor_id %}
+    <a href="{% url 'doctors:dashboard' %}">Доктор панель</a>
+{% endif %}
+                <a href="/accounts/login/">Войти</a>
+            </nav>
+
+{#            <nav class="side-menu" id="sideMenu">#}
+{#                <a href="/">Главная</a>#}
+{#                <a href="{% url 'profile' %}">Профиль</a>#}
+{#                <a href="/doctors">Врачи</a>#}
+{#                <a href="">Расписание</a>#}
+{#                <a href="/appointments">Запись</a>#}
+{#                <a href="/accounts/login/">Войти</a>#}
+{#            </nav>#}
+
+        </div>
+    </div>
+
+
+
+
+</section>
+
+
+ {% block content %}
+        {% endblock %}
+
+    <footer>
+        <div class="footer-content">
+ <h4><i class="fas fa-heartbeat"></i> Медицина</h4>
+             <a href="https://www.facebook.com/?locale=ru_RU"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+              <a href="https://web.whatsapp.com"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div class="footer-content">
+<h4>Контакт</h4>
+            <p> <i class="fa-solid fa-phone"></i> +996557631771</p>
+            <p> <i class="fa-solid fa-location-dot"></i> Kyrgyzstan.Osh </p>
+             <p> <i class="fa-solid fa-message"></i>  info@gmail.com</p>
+        </div>
+
+        <div class="footer-content">
+<h4>Новостная рассылка</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, iusto!</p> <br>
+           <input class="input" type="text"  placeholder="Email:"> <button>Старт</button>
+        </div>
+
+{#<div class="footer-conf">#}
+{#        <h5>© 2025 MedEase — Онлайн медициналык система</h5>#}
+{#    </div>#}
+    </footer>
+
+
+
+
+
+
+<script>
+  const slides = document.querySelectorAll('.bg-slide');
+  let i = 0;
+
+  setInterval(() => {
+    slides[i].classList.remove('active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('active');
+  }, 5000);
+
+
+
+
+
+
+
+
+
+
+
+
+const texts = [
+  "Добро пожаловать в MedEase",
+
+];
+
+let index = 0;
+let charIndex = 0;
+const speed = 120;
+const eraseSpeed = 80;
+const delay = 1500;
+
+const typingElement = document.getElementById("typing");
+
+function typeText() {
+  if (charIndex < texts[index].length) {
+    typingElement.textContent += texts[index].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeText, speed);
+  } else {
+    setTimeout(eraseText, delay);
+  }
+}
+
+function eraseText() {
+  if (charIndex > 0) {
+    typingElement.textContent = texts[index].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(eraseText, eraseSpeed);
+  } else {
+    index = (index + 1) % texts.length;
+    setTimeout(typeText, speed);
+  }
+}
+
+typeText();
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
+

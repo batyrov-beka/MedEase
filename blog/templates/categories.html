@@ -1,0 +1,235 @@
+{%  extends 'base.html' %}
+
+
+    {% block content %}
+
+        <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.contain-btn {
+  display: flex;
+margin-right:50px;
+    margin-left: 50px;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+
+}
+
+
+.sidebar {
+  width: 260px;
+  border-right: 1px solid #ddd;
+  padding: 30px 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 15px;
+  cursor: pointer;
+  color: #666;
+  border-left: 3px solid transparent;
+}
+
+.sidebar li.active {
+  color: #000;
+  font-weight: bold;
+  border-left: 3px solid #1e90ff;
+}
+
+
+.contents {
+  flex: 1;
+  padding: 40px;
+    background: white;
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}
+
+.tab img {
+  width: 150%;
+  max-height: 450px;
+  object-fit: cover;
+  margin: 20px 0;
+}
+
+
+    </style>
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Войти</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Войти</span>
+        </p>
+    </div>
+</div>
+</div>
+
+<div class="contain-btn">
+
+
+  <aside class="sidebar">
+    <ul>
+      <li class="active" data-target="imaging">Педиатр</li>
+      <li   data-target="ultrasound">Хирург</li>
+      <li data-target="xray">Кардиолог</li>
+      <li data-target="pediatrics">Инфекционист</li>
+      <li data-target="lab">Реаниматолог</li>
+      <li data-target="pregnancy">Гастроэнтеролог</li>
+        <li data-target="orthopedist">Ортопед</li>
+        <li data-target="ENT">Лор</li>
+        <li data-target="ophthalmologist">Офтальмолог</li>
+
+    </ul>
+  </aside>
+
+
+  <main class="contents">
+
+    <div class="tab active" id="imaging">
+      <h1>Педиатр</h1>
+      <img src="../static/css/categories-img/qs3sw3vfjnvc72ejunnnvv4aguyqvm81.jpg">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dicta dolorem eum fuga in minima neque praesentium repellat velit voluptas.</p>
+    </div>
+
+    <div class="tab" id="ultrasound">
+      <h1>Хирург</h1>
+      <img src="../static/css/categories-img/surgeon.jpg">
+      <p>Ultrasound services description.</p>
+    </div>
+
+    <div class="tab" id="xray">
+      <h1>Кардиолог</h1>
+      <img src="../static/css/categories-img/yzbo7uslqlbtfkz2s9gc5xyj7yvj118w.jpg">
+      <p>X-Ray diagnostic services.</p>
+    </div>
+
+    <div class="tab" id="pediatrics">
+      <h1>Инфекционист</h1>
+      <img src="../static/css/categories-img/infekcii_m1.jpg">
+      <p>Pediatric healthcare services.</p>
+    </div>
+
+    <div class="tab" id="lab">
+      <h1>Реаниматолог</h1>
+      <img src="../static/css/categories-img/anesthesiologist.webp">
+      <p>Laboratory testing services.</p>
+    </div>
+
+    <div class="tab" id="pregnancy">
+      <h1>Гастроэнтеролог</h1>
+      <img src="../static/css/categories-img/chto-lechit-gastroenterolog_3.jpg">
+      <p>Pregnancy care services.</p>
+    </div>
+
+         <div class="tab" id="orthopedist">
+      <h1>Ортопед</h1>
+      <img src="../static/css/categories-img/chto-lechit-ortoped.jpg.pagespeed.ce_.zymofn6uhl.jpg">
+      <p>Pregnancy care services.</p>
+    </div>
+
+         <div class="tab" id="ENT">
+      <h1>Лор</h1>
+      <img src="../static/css/categories-img/detskik-lor.jpg">
+      <p>Pregnancy care services.</p>
+    </div>
+
+         <div class="tab" id="ophthalmologist">
+      <h1>Офтальмолог</h1>
+      <img src="../static/css/categories-img/little-girl-checking-up-her-sight-ophthalmology-center-1024x683.jpg">
+      <p>Pregnancy care services.</p>
+    </div>
+
+  </main>
+
+</div>
+
+
+
+
+        <script>
+        const menuItems = document.querySelectorAll('.sidebar li');
+const tabs = document.querySelectorAll('.tab');
+
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+
+
+    menuItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+
+    const target = item.getAttribute('data-target');
+    document.getElementById(target).classList.add('active');
+  });
+});
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

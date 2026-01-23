@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+            <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Доктор панель</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Доктор панель</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+    <div style="display:block; justify-content: center;text-align: center; margin:20px 10px">
+
+<h2 style="font-size: 33px;line-height: 1.5">Доктор: {{ doctor.name }}</h2>
+<p style="font-size: 20px; font-weight: 550">{{ doctor.specialty }}</p>
+
+<hr>
+
+
+
+<h3 style="margin: 20px;font-size: 28px">Подписано на вас:</h3>
+
+     </div>
+
+
+      <div style="margin: 30px 30px;font-size: 23px" >
+{% for a in appointments %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+        <p><b>Пациент:</b> {{ a.user.username }}</p>
+        <p><b>Дата:</b> {{ a.date }}</p>
+        <p><b>Время:</b> {{ a.time }}</p>
+    </div>
+{% empty %}
+
+    <p> Подписки пока нет</p>
+{% endfor %}
+
+    </div>
+
+
+{% endblock %}

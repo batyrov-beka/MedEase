@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.doctor-container{
+    width: 98%;
+   margin: 30px 30px;
+  display: flex;
+    text-align: center;
+
+}
+.doctor-container-content img{
+    width: 700px;
+    height: 500px;
+    justify-content: center;
+    backdrop-filter: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+
+}
+.doctor-container-content-text{
+    float: right;
+    width: 700px;
+
+}
+.doctor-container-content-text h2{
+    {#margin-left: 200px;#}
+    {#font-family: "Segoe UI", system-ui, sans-serif;#}
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+.doctor-container-content-text h6{
+    margin-left: 20px;
+font-weight: 500;
+    font-size: 25px;
+
+
+}
+.doctor-container-content-text p{
+margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+
+}
+.doctor-container-content-text a{
+    font-size: 20px;
+    font-weight: 550;
+    background: #0f87c7;
+    color: white;
+    border-radius: 5px;
+   margin-top: 5px;
+    display: inline-block;
+        margin-bottom: 10px;
+    height: 35px;
+    width: 120px;
+    padding-top: 5px;
+}
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Врачи</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Врачи</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+    <div class="doctor-container">
+
+<div class="doctor-container-content">
+        <img src="{{ doctor.photo.url }}">
+
+<div class="doctor-container-content-text">
+<h2>{{ doctor.name }}</h2>
+<h6><strong>Специальность:</strong> {{ doctor.specialty }}</h6>
+<h6><strong>Опыт:</strong> {{ doctor.experience }} год</h6>
+<p>{{ doctor.bio }}</p>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'appointments:book_appointment' doctor.id %}">
+
+Подписка
+    </a>
+{% else %}
+    <p>
+Войдите в систему, чтобы подписаться.</p>
+{% endif %}
+</div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+<style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+    .schedule-container {
+        position: relative;
+        margin: 50px 90px;
+        overflow-x: auto;
+    }
+
+    .schedule-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background-color: white;
+    }
+
+
+    .schedule-table th, .schedule-table td {
+        border: 1px solid #ccc;
+        height: 80px;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .schedule-table th {
+        background-color: #f8f9fa;
+        height: 50px;
+        font-weight: bold;
+    }
+
+    .schedule-table th,
+.schedule-table td {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+    .time-col {
+        background-color: #fdfdfd;
+        font-size: 12px;
+        color: #777;
+        width: 100px; /
+    }
+
+
+
+    .appointment-overlay {
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        border-radius: 30px;
+        color: white;
+        text-align: center;  flex-direction: column; align-items: center; justify-content: center;
+
+        z-index: 5;
+    }
+
+    .dr-card {
+        position: absolute;
+        pointer-events: auto;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 12px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .blue { background-color: #3498db; }
+
+
+    .dr-img { width: 110px; height: 110px; border-radius: 50%; margin-bottom: 5px; border: 2px solid rgba(255,255,255,0.5); }
+</style>
+
+
+
+
+
+        <div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Часы работы</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Часы работы</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+<div class="schedule-container">
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th>Понедельник</th>
+                <th>Вторник</th>
+                <th>Среда</th>
+                <th>Четверг</th>
+                <th>Пятница</th>
+                <th>Суббота</th>
+                <th>Воскресенье</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="time-col">08:00-09:00</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td class="time-col">09:00-10:00</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr><td class="time-col">10:00-11:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="time-col">11:00-12:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="time-col">12:00-13:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="time-col">13:00-14:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="time-col">14:00-15:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="time-col">15:00-16:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="time-col">16:00-17:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="time-col">17:00-18:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+    </table>
+
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 50px; left: 12.8%; height: 320px; width: 12%;">
+             <img src="../static/css/img/hospital-healthcare-workers-covid-19-treatment-concept-close-up-serious-determined-bearded-doctor-white-scrubs-stethoscope-frowning-looking-camera-listening-patient_1258-60474.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 50px; left: 25.3%; height: 480px; width: 12%; background: brown ">
+             <img src="../static/css/img/female-doctor-hospital-with-stethoscope_23-2148827774.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 50px; left: 62.8%; height: 480px; width: 12%;  ">
+             <img src="../static/css/img/hospital-healthcare-workers-covid-19-treatment-concept-close-up-serious-determined-bearded-doctor-white-scrubs-stethoscope-frowning-looking-camera-listening-patient_1258-60474.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 130px; left: 75.3%; height: 480px; width: 12%; background: green ">
+             <img src="../static/css/img/headshot-portrait-young-friendly-female-medical-worker-gray-background_116407-31095.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+
+    <div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 210px; left: 87.9%; height: 560px; width: 12%; background: darkorange ">
+             <img src="../static/css/img/doctor-offering-medical-teleconsultation_23-2149329007.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 450px; left: 12.8%; height: 400px; width: 12%; background: green">
+             <img src="../static/css/img/headshot-portrait-young-friendly-female-medical-worker-gray-background_116407-31095.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 450px; left: 37.7%; height: 400px; width: 12%; background: darkorange ">
+             <img src="../static/css/img/doctor-offering-medical-teleconsultation_23-2149329007.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+<div class="appointment-overlay">
+        <div class="dr-card blue" style="top: 290px; left: 50.3%; height: 400px; width: 12%; background: brown ">
+             <img src="../static/css/img/female-doctor-hospital-with-stethoscope_23-2148827774.avif" alt="" class="dr-img">
+             <p>Др. Эрик Снайдер</p>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

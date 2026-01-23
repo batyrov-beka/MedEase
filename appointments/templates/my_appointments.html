@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+
+        <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-block{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+
+}
+.btn-block_{
+    width: 60%;
+   margin-bottom: 20px;
+    margin-top: 25px;
+
+}
+.btn-block_ h2{
+    font-size: 30px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    margin-bottom: 18px;
+
+
+}
+.btn-block_ p{
+color: #707070;
+    font-size: 19px;
+    font-family: "Segoe UI", system-ui, sans-serif;
+
+}
+.btn-block_conf{
+    max-width: 1000px;
+    padding: 20px 30px;
+    margin: 40px auto;
+    background: white;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 23px;
+
+
+
+}
+.btn-block_conf_a{
+    color: #0707ed;
+}
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Запись</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Запись</span>
+        </p>
+    </div>
+</div>
+</div>
+
+    <div class="btn-block">
+
+    <div class="btn-block_">
+
+
+
+
+<h2>Мои подписки</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eligendi facere facilis hic ipsam iste molestiae nostrum omnis repudiandae sint.</p>
+
+
+
+    <div class="btn-block_conf">
+
+
+    {% for a in appointments %}
+
+     <ol>
+        <li>{{ a.doctor.name }} - {{ a.patient_name }} {{ a.patient }} / {{ a.date }} /
+        {{ a.time }}
+
+            <a class="btn-block_conf_a" href="{% url 'appointments:delete' a.id %}">Отменить</a>
+        </li>
+     </ol>
+    {% empty %}
+    <ol>
+        <li colspan="4">Подписки пока нет.</li>
+    </ol>
+
+    {% endfor %}
+
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

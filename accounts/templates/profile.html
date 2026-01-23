@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.section-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+
+
+}
+
+.section-content-conf{
+    width: 60%;
+    margin-top: 20px;
+    margin-bottom: 25px;
+
+
+
+}
+.section-content-conf h3{
+    font-size: 35px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+
+}
+.section-content-conf p{
+    margin-bottom: 30px;
+    font-size: 19px;
+    color: #707070;
+}
+.section-content-conf1{
+    width: 100%;
+}
+
+.section-content-conf1{
+  max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+}
+.section-content-conf1 li{
+    padding: 12px 10px;
+    border-bottom: 1px solid #9d9fa3;
+    font-size: 23px;
+
+
+}
+
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Профиль</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Профиль</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+
+    <section class="section-content" >
+    <div class="section-content-conf">
+<h3>Мои подписки</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolor dolorem facilis harum, molestiae mollitia necessitatibus qui quo rem sapiente!</p>
+
+
+    <div class="section-content-conf1">
+<ol>
+    {% for a in appointments %}
+        <li>
+            {{ a.doctor.name }} — {{ a.patient_name }}  {{ a.patient }} /
+            {{ a.date }} / {{ a.time }}
+        </li>
+    {% empty %}
+        <li>
+Подписки пока нет</li>
+    {% endfor %}
+
+</ol>
+    </div>
+</div>
+    </section>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block content %}
+            <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+.select{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+
+}
+.select-content{
+    width: 60%;
+    display: block;
+    text-align: center;
+    padding-bottom: 50px;
+
+
+}
+
+.select-blog{
+    margin-top: 40px;
+    display: inline-block;
+    width: 400px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+gap: 15px;
+    z-index: 1;
+    line-height: 2;
+
+
+}
+.select-content h2{
+    font-size: 35px;
+    font-family: Arial;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.select-content p{
+    font-size: 19px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #707070;
+}
+.select-blog p{
+    color: black;
+    flex-wrap: wrap;
+
+}
+.select-blog img{
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+   text-align: center;
+    justify-content: center;
+    margin-left: 500px;
+}
+
+.select-blog input, .button_1 {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+    transform:scale(1.2);
+}
+.select-blog .button_1{
+    margin-top: 20px;
+}
+.select-blog .button_1:hover{
+background: #0f87c7;
+    color: white;
+}
+
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Врачи</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Врачи</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+<div class="select">
+<div class="select-content">
+    <h2 >Подписка: {{ doctor.name }}</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dicta dolorum tempora voluptate. Cum doloremque placeat quisquam soluta! Odit?</p>
+{#  <img  src="{{ doctor.photo.url }}" >#}
+    <div class="select-blog">
+<form method="post">
+  {% csrf_token %}
+    <p>Имя:</p>
+    <input type="text" name=text required>
+
+    <p>Фамилия:</p>
+    <input type="text" name="text-conf" required>
+
+  <p>Дата:</p>
+  <input type="date" name="date" required>
+
+  <p>Время:</p>
+  <input type="time" name="time" required>
+
+ <button class="button_1" type="submit">Подписка</button>
+
+</form>
+
+
+        </div>
+ </div>
+    </div>
+
+{% endblock %}

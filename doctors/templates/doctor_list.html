@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block content %}
+
+            <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+.btn-blog{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 60px;
+    background: white;
+
+}
+
+
+
+.container-blog{
+   display: inline;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.doctors{
+     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    width: 100%;
+    justify-items: center;
+
+}
+.container-blog h2{
+    font-size: 40px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+
+img{
+width: 350px;
+    border-radius: 10px ;
+background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    height: 300px;
+}
+    .btn-blog-p{
+           display: inline-block;
+        font-size: 20px;
+        width: 750px;
+        color: #666;
+        margin-bottom: 40px;
+    }
+    .doctors a{
+        background: #0f87c7;
+        color: white;
+        {#width: 150px;#}
+        display: block;
+        height: 35px;
+        border-radius: 5px;
+        padding-right: 5px;
+        padding-top: 3px;
+         font-size: 19px;
+    font-weight: 500;
+        margin-top: 25px;
+        margin-bottom: 50px;
+    }
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Врачи</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Врачи</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="btn-blog">
+<div class="container-blog">
+<h2 >Наши врачи</h2>
+    <p class="btn-blog-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias aliquid dolorem fugiat incidunt ipsa maxime nam, nesciunt nostrum quo!</p>
+
+
+
+
+<div class="doctors">
+{% for d in doctors %}
+<div class="card">
+
+    {% if d.photo %}
+        <img src="{{ d.photo.url }}">
+    {% endif %}
+
+    <a href="{% url 'doctors:detail' d.id %}">
+        <h3 style="font-size: 27px">{{ d.name }}</h3>
+    </a>
+
+{#    <p style="font-size: 23px">{{ d.specialty }}</p>#}
+{#    <p style="font-size: 15px">Опыт: {{ d.experience }} год</p>#}
+
+</div>
+{% empty %}
+<p>Врачей найти не удалось.</p>
+{% endfor %}
+ </div>
+</div>
+    </div>
+{% endblock %}

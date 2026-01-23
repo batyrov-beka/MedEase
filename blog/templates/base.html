@@ -1,0 +1,178 @@
+
+
+
+{% extends 'index.html' %}
+{% block content %}
+    <header>
+    <div class="hero">
+
+
+  <div class="bg-slide active" style="background-image:url('../static/css/img/Doctors.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('../static/css/img/455_1180x740_bdb.jpg')"></div>
+  <div class="bg-slide" style="background-image:url('../static/css/img/start.png')"></div>
+
+
+
+  <div class="hero-content">
+
+{#    <h1>Добро пожаловать в <span>MedEase</span></h1>#}
+      <h2 class="bnt" style="font-size: 40px; color: black; font-family: Arial, sans-serif;">
+          <span id="typing"></span>
+  <span class="cursor">|</span></h2>
+
+    <p>Онлайн-запись к врачу, медицинские советы и цифровое здоровье.</p>
+   <a  href="/accounts/register/" class="a-href">Регистрация</a>
+  </div>
+
+</div>
+
+    </header>
+
+<main>
+    <a href="{% url 'about' %}" class="main-content">
+         <h3><i class="fa-solid fa-clock"> </i> Часы работы</h3>
+      <p>Пн–Пт: 8:00–19:00</p><br>
+        <p>Суббота: 9:00–17:00</p><br>
+        <p>Воскресенье: 9:00–15:00</p>
+    </a>
+
+    <a href="{% url 'about' %}" class="main-content">
+         <h3><i class="fa-solid fa-business-time"></i> Расписание врачей</h3>
+    <p>
+        Следующая информация служит лишь ориентиром...
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam, beatae doloribus est fuga fugiat, nesciunt numquam obcaecati officia rem rerum sequi tempora unde? Accusantium culpa laboriosam neque nostrum officiis pariatur sapiente ut?
+    </p>
+    </a>
+
+    <a href="{% url 'about' %}" class="main-content">
+              <h3><i class="fa-solid fa-layer-group"></i> Запись на приём</h3>
+        <p>Первый шаг к здоровой жизни — записаться...
+            lorem30
+        </p>
+
+    </a>
+    <a href="" class="main-content">
+           <h3><i class="fa-solid fa-phone"></i> Экстренные случаи</h3>
+    <p class="phone">+996557631771</p><br>
+    <p>Позвоните нам</p>
+
+    </a>
+</main>
+
+
+
+    <section class="section-conf">
+    <h2 class="title">Наши преимущества</h2>
+
+    <div class="section-content">
+        <div class="section-content-select">
+            <div class="icon">
+             <i class="fa-solid fa-stethoscope"></i>
+            </div>
+<h3>Квалифицированные специалисты</h3>
+            <p>Мы нанимаем лучших специалистов, чтобы предоставлять вам высококачественные диагностические услуги.</p>
+        </div>
+    </div>
+
+   <div class="section-content">
+        <div class="section-content-select">
+            <div class="icon">
+            <i class="fa-solid fa-microscope"></i>
+            </div>
+<h3>Современное оборудование</h3>
+            <p>Мы используем первоклассное медицинское оборудование для своевременной диагностики различных заболеваний.</p>
+        </div>
+    </div>
+
+
+  <div class="section-content">
+        <div class="section-content-select">
+            <div class="icon">
+                           <i class="fa-solid fa-kit-medical"></i>
+
+            </div>
+<h3>Экстренная диагностика</h3>
+            <p>Наши услуги экстренной диагностики помогают вам получить наиболее точный диагноз в минимальные сроки.</p>
+        </div>
+    </div>
+
+</section>
+
+        <div class="free-container">
+    <div class="free-container-conf">
+        <h1 class="title1">Все виды диагностики</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Maiores, quibusdam.</p>
+        <a class="btn" href="{% url 'contact' %}">Бесплатный консультация</a>
+    </div>
+    </div>
+
+
+
+
+
+
+
+<main class="main-container">
+<div class="main-container-conf">
+    <h6 class="title" >Наши услуги</h6>
+    <p>В нашей клинике вы можете получить лучшие и самые разнообразные диагностические услуги в регионе. Заходите на наш сайт, чтобы узнать больше.</p>
+
+
+<div class="main-container-ee">
+<div class="main-container-conf-1">
+    <img class="main-container-img" src="../static/css/img/pre.jpg" alt="">
+    <a class="main-container-a" href="{% url 'categories' %}">Педиатр</a>
+</div>
+
+<div class="main-container-conf-1">
+      <img class="main-container-img" src="../static/css/img/hirurg1.jpg" alt="">
+     <a class="main-container-a" href="{% url 'categories' %}">Хирург</a>
+</div>
+
+<div class="main-container-conf-1">
+      <img class="main-container-img" src="../static/css/img/952019fa9c573904c4e3db649ef83f19.jpg" alt="">
+    <a class="main-container-a" href="{% url 'categories' %}">Кардиолог</a>
+</div>
+
+<div class="main-container-conf-1">
+    <img class="main-container-img" src="../static/css/img/13a2822d25c4434d371ec2981883ce3f.jpg" alt="">
+  <a class="main-container-a" href="{% url 'categories' %}">Инфекционист</a>
+</div>
+
+<div class="main-container-conf-1">
+<img class="main-container-img" src="../static/css/img/anesthesiologist.webp" alt="">
+    <a class="main-container-a" href="{% url 'categories' %}">Реаниматолог</a>
+</div>
+
+<div class="main-container-conf-1">
+<img class="main-container-img" src="../static/css/img/b26128ee5998ea789c20ef44c689d6c4.jpg" alt="">
+    <a class="main-container-a" href="{% url 'categories' %}">Гастроэнтеролог</a>
+</div>
+
+<div class="main-container-conf-1">
+<img class="main-container-img" src="../static/css/img/chto-lechit-ortoped.jpg.pagespeed.ce_.zymofn6uhl.jpg" alt="">
+  <a class="main-container-a" href="{% url 'categories' %}">Ортопед</a>
+</div>
+
+<div class="main-container-conf-1">
+<img class="main-container-img" src="../static/css/img/bbaebc996bbceddcdb0a6c7d3e075af4.jpg" alt="">
+    <a class="main-container-a" href="{% url 'categories' %}">Лор</a>
+</div>
+
+<div class="main-container-conf-1">
+<img class="main-container-img" src="../static/css/img/EnMitUqXIA4inBE.jpg" alt="">
+  <a class="main-container-a" href="{% url 'categories' %}">Офтальмолог</a>
+</div>
+    </div>
+    </div>
+</main>
+
+
+
+
+ <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d97044.45847868908!2d72.810496!3d40.5274624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2skg!4v1744652897003!5m2!1sru!2skg"></iframe>
+
+
+{% endblock %}
+
+

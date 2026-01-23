@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+
+        <style>
+.blog-content{
+position: relative;
+height: 320px;
+background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+
+background-position: center 25%;
+
+
+
+
+}
+{#    .page-header__overlay {#}
+{#    position: absolute;#}
+{#    inset: 0;#}
+{#    background: rgba(69, 173, 243, 0.55); }#}
+
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 150px 60px;
+}
+
+.page-header__content h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.page-header__content p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.page-header__content a {
+    color: #fff;
+    text-decoration: none;
+}
+    </style>
+
+
+
+<div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Войти</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Войти</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+
+<div style="width:400px; margin:80px auto; padding:40px;">
+    <h2>Вход</h2>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Имя пользователя:</p>
+        <input type="text" name="username">
+        <p>Пароль:</p>
+        <input type="password" name="password">
+        <button type="submit" style="background:#008080; color:white; padding:10px;">Войти</button>
+    </form>
+    <p>Нет аккаунта? <a href="/accounts/register/">Регистрация</a></p>
+</div>
+{% endblock %}
