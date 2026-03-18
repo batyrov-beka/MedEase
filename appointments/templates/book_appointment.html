@@ -1,171 +1,179 @@
 {% extends 'base.html' %}
 {% block content %}
-            <style>
-.blog-content{
-position: relative;
-height: 320px;
-background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
-background-size: cover;
-background-repeat: no-repeat;
 
-background-position: center 25%;
+<style>
 
 
 
+       .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
 
-}
-{#    .page-header__overlay {#}
-{#    position: absolute;#}
-{#    inset: 0;#}
-{#    background: rgba(69, 173, 243, 0.55); }#}
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
 
+        {#backdrop-filter: blur(2px);#}
+    }
 
-.page-header__content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    padding: 150px 60px;
-}
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
 
 .page-header__content h1 {
-    font-size: 52px;
+    font-size: 48px;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .page-header__content p {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 18px;
+
 }
 
 .page-header__content a {
-    color: #fff;
+    color: #ffffff;
+
     text-decoration: none;
 }
 
 
 
+
 .select{
     display: flex;
-    text-align: center;
     justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-
+    margin-top: 60px;
+    margin-bottom: 80px;
 }
+
 .select-content{
-    width: 60%;
-    display: block;
+    width: 600px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
     text-align: center;
-    padding-bottom: 50px;
+}
 
+.select-content h2{
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: #0f87c7;
+}
 
+.select-content p{
+    font-size: 16px;
+    color: #666;
+
+    margin-bottom: 30px;
 }
 
 .select-blog{
-    margin-top: 40px;
-    display: inline-block;
-    width: 400px;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-gap: 15px;
-    z-index: 1;
-    line-height: 2;
+    text-align: left;
+}
 
-
-}
-.select-content h2{
-    font-size: 35px;
-    font-family: Arial;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.select-content p{
-    font-size: 19px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #707070;
-}
 .select-blog p{
-    color: black;
-    flex-wrap: wrap;
-
-}
-.select-blog img{
-    width: 200px;
-    height: 200px;
-    display: inline-block;
-   text-align: center;
-    justify-content: center;
-    margin-left: 500px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 15px;
 }
 
-.select-blog input, .button_1 {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-    transform:scale(1.2);
+.select-blog input{
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+    font-size: 15px;
 }
-.select-blog .button_1{
-    margin-top: 20px;
+
+.select-blog input:focus{
+    border-color: #0f87c7;
+    outline: none;
+    box-shadow: 0 0 5px rgba(15,135,199,0.3);
 }
-.select-blog .button_1:hover{
-background: #0f87c7;
+
+.button_1{
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 25px;
+    background: #0f87c7;
     color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-    </style>
+.button_1:hover{
+    background: #0c6aa3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15,135,199,0.4);
+}
 
 
 
-<div class="blog" >
-<div class="blog-content">
 
 
-    <div class="page-header__overlay"></div>
+</style>
 
 
+<div class="blog">
+    <div class="blog-content">
+        <div class="page-header__overlay"></div>
 
-  <div class="page-header__content">
-    <h1>Врачи</h1>
-        <p>
-            <a href="/">Главная</a> →
-            <span style="color: #cfc3c3">Врачи</span>
-        </p>
+        <div class="page-header__content">
+            <h1>Врачи</h1>
+            <p>
+                <a href="/">Главная</a> →
+                <span style="color: #e0e0e0">Врачи</span>
+            </p>
+        </div>
     </div>
 </div>
-</div>
-
 
 
 <div class="select">
-<div class="select-content">
-    <h2 >Подписка: {{ doctor.name }}</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque dicta dolorum tempora voluptate. Cum doloremque placeat quisquam soluta! Odit?</p>
-{#  <img  src="{{ doctor.photo.url }}" >#}
-    <div class="select-blog">
-<form method="post">
-  {% csrf_token %}
-    <p>Имя:</p>
-    <input type="text" name=text required>
+    <div class="select-content">
+        <h2>Запись к врачу: {{ doctor.name }}</h2>
+        <p>
+            Ваше здоровье в надежных руках. Наши специалисты — это профессионалы,
+            которые заботятся о каждом пациенте и находят решение даже в сложных случаях.
+        </p>
 
-    <p>Фамилия:</p>
-    <input type="text" name="text-conf" required>
+        <div class="select-blog">
+            <form method="post">
+                {% csrf_token %}
 
-  <p>Дата:</p>
-  <input type="date" name="date" required>
+                <p>Имя:</p>
+                <input type="text" name="text" required>
 
-  <p>Время:</p>
-  <input type="time" name="time" required>
+                <p>Фамилия:</p>
+                <input type="text" name="text-conf" required>
 
- <button class="button_1" type="submit">Подписка</button>
+                <p>Дата:</p>
+                <input type="date" name="date" required>
 
-</form>
+                <p>Время:</p>
+                <input type="time" name="time" required>
 
+                <button class="button_1" type="submit">Записаться</button>
 
+            </form>
         </div>
- </div>
     </div>
+</div>
 
 {% endblock %}

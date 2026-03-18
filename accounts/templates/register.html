@@ -1,47 +1,144 @@
 {% extends 'base.html' %}
 {% block content %}
     <style>
-.blog-content{
-position: relative;
-height: 320px;
-background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
-background-size: cover;
-background-repeat: no-repeat;
+    .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
 
-background-position: center 25%;
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
 
+        {#backdrop-filter: blur(2px);#}
+    }
 
-
-
-}
-{#    .page-header__overlay {#}
-{#    position: absolute;#}
-{#    inset: 0;#}
-{#    background: rgba(69, 173, 243, 0.55); }#}
-
-
-.page-header__content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    padding: 150px 60px;
-}
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
 
 .page-header__content h1 {
-    font-size: 52px;
+    font-size: 48px;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .page-header__content p {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 18px;
+
 }
 
 .page-header__content a {
-    color: #fff;
+    color: #ffffff;
+
     text-decoration: none;
 }
-    </style>
+
+
+
+
+
+.form-box {
+    width: 450px;
+    margin: 80px auto;
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+.form-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 18px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+    outline: none;
+}
+
+.form-box input:focus {
+    border-color: #008080;
+    box-shadow: 0 0 10px rgba(0,128,128,0.4);
+}
+
+
+.form-box button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #008080, #00b3b3);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-box button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+
+.form-box a {
+    color: #008080;
+    text-decoration: none;
+}
+
+.form-box a:hover {
+    text-decoration: underline;
+}
+
+.password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .password-container input {
+        width: 100%;
+        padding-right: 40px;
+    }
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        cursor: pointer;
+        color: #999;
+        z-index: 10;
+    }
+    .toggle-password:hover {
+        color: #00a884;
+    }
+</style>
+
 
 
 
@@ -66,23 +163,57 @@ background-position: center 25%;
 
 
 
-<div style="width:300px; margin:80px auto;">
+<div class="form-box">
     <h2>Регистрация</h2>
     <form method="post">
         {% csrf_token %}
+
         <p>Имя пользователя</p>
         {{ form.username }}
-        <p>Email:   </p>
-        {{ form.email }}
-        <p>Парол:</p>
-        {{ form.password1 }}
-        <p>Подтвердите пароль:</p>
-        {{ form.password2 }}
-{#        {{ form.as_p }}#}
-        <br>
-        <br> <button type="submit" style="background:#008080; color:white; padding:10px;">Зарегистрироваться</button>
 
+        <p>Email</p>
+        {{ form.email }}
+
+        <p>Пароль</p>
+        <div class="password-container">
+            {{ form.password1 }}
+            <i class="fa-solid fa-eye toggle-password" id="eye1"></i>
+        </div>
+
+        <p>Подтвердите пароль</p>
+        <div class="password-container">
+            {{ form.password2 }}
+            <i class="fa-solid fa-eye toggle-password" id="eye2"></i>
+        </div>
+
+        <button type="submit">Зарегистрироваться</button>
     </form>
-    <p>Уже есть аккаунт? <a href="/accounts/login/">Войти</a></p>
+
+    <p style="text-align:center; margin-top:15px;">
+        Уже есть аккаунт? <a href="/accounts/login/">Войти</a>
+    </p>
 </div>
+
+<script>
+    function setupPasswordToggle(eyeId, inputSelector) {
+        const eye = document.getElementById(eyeId);
+
+
+        const input = document.querySelector(inputSelector);
+
+        eye.addEventListener('click', function () {
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+
+
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    }
+
+
+    setupPasswordToggle('eye1', '#id_password1');
+    setupPasswordToggle('eye2', '#id_password2');
+</script>
+
 {% endblock %}

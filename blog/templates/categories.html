@@ -89,15 +89,28 @@ margin-right:50px;
   display: none;
 }
 
-.tab.active {
-  display: block;
-}
-
 .tab img {
-  width: 150%;
+  width: 100%;
   max-height: 450px;
   object-fit: cover;
   margin: 20px 0;
+    border-radius: 10px;
+}
+
+.sidebar {
+  position: relative;
+  z-index: 10;
+}
+
+.contents {
+  position: relative;
+  z-index: 1;
+}
+.contents p{
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 25px;
+    color: #555555;
+
 }
 
 
@@ -111,10 +124,10 @@ margin-right:50px;
 
 
   <div class="page-header__content">
-    <h1>Войти</h1>
+    <h1>Наши услуги</h1>
         <p>
             <a href="/">Главная</a> →
-            <span style="color: #cfc3c3">Войти</span>
+            <span style="color: #cfc3c3">Наши услуги</span>
         </p>
     </div>
 </div>
@@ -125,7 +138,7 @@ margin-right:50px;
 
   <aside class="sidebar">
     <ul>
-      <li class="active" data-target="imaging">Педиатр</li>
+     <li data-target="imaging">Педиатр</li>
       <li   data-target="ultrasound">Хирург</li>
       <li data-target="xray">Кардиолог</li>
       <li data-target="pediatrics">Инфекционист</li>
@@ -141,58 +154,58 @@ margin-right:50px;
 
   <main class="contents">
 
-    <div class="tab active" id="imaging">
+   <div class="tab" id="imaging">
       <h1>Педиатр</h1>
       <img src="../static/css/categories-img/qs3sw3vfjnvc72ejunnnvv4aguyqvm81.jpg">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dicta dolorem eum fuga in minima neque praesentium repellat velit voluptas.</p>
+      <p>Здоровье вашего ребенка — наш главный приоритет. Наши педиатры найдут подход к каждому маленькому пациенту, обеспечат профессиональный уход и ответят на все вопросы родителей о развитии и воспитании детей.</p>
     </div>
 
     <div class="tab" id="ultrasound">
       <h1>Хирург</h1>
       <img src="../static/css/categories-img/surgeon.jpg">
-      <p>Ultrasound services description.</p>
+      <p>Наши высококвалифицированные хирурги проводят операции любой сложности, используя передовые методики и современное оборудование. Мы гарантируем максимальную безопасность и тщательный контроль на каждом этапе вашего выздоровления</p>
     </div>
 
     <div class="tab" id="xray">
       <h1>Кардиолог</h1>
       <img src="../static/css/categories-img/yzbo7uslqlbtfkz2s9gc5xyj7yvj118w.jpg">
-      <p>X-Ray diagnostic services.</p>
+      <p>Здоровье сердца — это основа долгой и активной жизни. Наши кардиологи помогут вам вовремя выявить риски, проведут точную диагностику и подберут эффективную программу лечения и профилактики сердечно-сосудистых заболеваний.</p>
     </div>
 
     <div class="tab" id="pediatrics">
       <h1>Инфекционист</h1>
       <img src="../static/css/categories-img/infekcii_m1.jpg">
-      <p>Pediatric healthcare services.</p>
+      <p>Наши специалисты обеспечивают экспертную диагностику и эффективное лечение широкого спектра инфекционных заболеваний. Мы используем передовые лабораторные методы, чтобы быстро выявить возбудителя и вернуть вам здоровье.</p>
     </div>
 
     <div class="tab" id="lab">
       <h1>Реаниматолог</h1>
       <img src="../static/css/categories-img/anesthesiologist.webp">
-      <p>Laboratory testing services.</p>
+      <p>Наши специалисты обеспечивают круглосуточную поддержку пациентов в самых критических состояниях. Мы используем передовое оборудование для мониторинга и жизнеобеспечения, гарантируя максимальную безопасность и профессиональный медицинский контроль</p>
     </div>
 
     <div class="tab" id="pregnancy">
       <h1>Гастроэнтеролог</h1>
       <img src="../static/css/categories-img/chto-lechit-gastroenterolog_3.jpg">
-      <p>Pregnancy care services.</p>
+      <p>Здоровье пищеварительной системы — залог вашего хорошего самочувствия и жизненной энергии. Наши специалисты помогут выявить причины дискомфорта, проведут точную диагностику и подберут индивидуальный план лечения и питания.</p>
     </div>
 
          <div class="tab" id="orthopedist">
       <h1>Ортопед</h1>
       <img src="../static/css/categories-img/chto-lechit-ortoped.jpg.pagespeed.ce_.zymofn6uhl.jpg">
-      <p>Pregnancy care services.</p>
+      <p>Верните себе радость активного движения без боли. Наши специалисты занимаются лечением и профилактикой заболеваний опорно-двигательного аппарата, помогая вам сохранять легкость походки и здоровье суставов в любом возрасте.</p>
     </div>
 
          <div class="tab" id="ENT">
       <h1>Лор</h1>
       <img src="../static/css/categories-img/detskik-lor.jpg">
-      <p>Pregnancy care services.</p>
+      <p>Здоровье уха, горла и носа имеет решающее значение для полноценной жизни и свободного дыхания. Наши специалисты проводят точную диагностику и эффективное лечение острых и хронических заболеваний, обеспечивая вам комфорт и здоровье.</p>
     </div>
 
          <div class="tab" id="ophthalmologist">
       <h1>Офтальмолог</h1>
       <img src="../static/css/categories-img/little-girl-checking-up-her-sight-ophthalmology-center-1024x683.jpg">
-      <p>Pregnancy care services.</p>
+      <p>Мир прекрасен, когда вы видите его четко. Наши специалисты помогут сохранить остроту вашего зрения, проведут полную диагностику и подберут эффективное лечение или коррекцию, учитывая индивидуальные особенности ваших глаз.</p>
     </div>
 
   </main>
@@ -202,26 +215,33 @@ margin-right:50px;
 
 
 
-        <script>
-        const menuItems = document.querySelectorAll('.sidebar li');
+      <script>
+const menuItems = document.querySelectorAll('.sidebar li');
 const tabs = document.querySelectorAll('.tab');
 
+function showTab(id) {
+  tabs.forEach(tab => {
+    tab.style.display = "none";
+  });
+  menuItems.forEach(li => {
+    li.classList.remove("active");
+  });
+
+  document.getElementById(id).style.display = "block";
+  document.querySelector(`[data-target="${id}"]`).classList.add("active");
+}
+
+// click
 menuItems.forEach(item => {
-  item.addEventListener('click', () => {
-
-
-    menuItems.forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-
-    tabs.forEach(tab => tab.classList.remove('active'));
-
-
-    const target = item.getAttribute('data-target');
-    document.getElementById(target).classList.add('active');
+  item.addEventListener("click", function () {
+    const target = this.getAttribute("data-target");
+    showTab(target);
   });
 });
 
-        </script>
+// стартта Педиатр
+showTab("imaging");
+</script>
 
 
 

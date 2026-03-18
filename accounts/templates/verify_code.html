@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+ .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
+
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
+
+        {#backdrop-filter: blur(2px);#}
+    }
+
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
+
+.page-header__content h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.page-header__content p {
+    font-size: 18px;
+
+}
+
+.page-header__content a {
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+    .verify-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+        padding: 40px 20px;
+        background-color: #f8fafc;
+    }
+
+    .verify-card {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .verify-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .verify-card h2 {
+        color: #1e293b;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .verify-card p {
+        color: #64748b;
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .code-input-group {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .code-input-group input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 24px;
+        letter-spacing: 8px;
+        text-align: center;
+        color: #0f172a;
+        transition: all 0.3s ease;
+        background-color: #fdfdfd;
+    }
+
+    .code-input-group input:focus {
+        border-color: #00a884;
+        background-color: #fff;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(0, 168, 132, 0.1);
+    }
+
+    .btn-verify {
+        width: 100%;
+        padding: 15px;
+        background-color: #00a884;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 168, 132, 0.2);
+    }
+
+    .btn-verify:hover {
+        background-color: #008f6f;
+        box-shadow: 0 6px 15px rgba(0, 168, 132, 0.3);
+    }
+
+    .resend-container {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .resend-link {
+        color: #00a884;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: color 0.2s;
+    }
+
+    .resend-link:hover {
+        color: #007d61;
+        text-decoration: underline;
+    }
+
+
+    .msg {
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .msg-error { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .msg-success { background-color: #ecfdf5; color: #065f46; border: 1px solid #d1fae5; }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        color: #64748b;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #f1f5f9;
+        color: #1e293b;
+        border-color: #cbd5e1;
+    }
+</style>
+
+    <div class="blog" >
+<div class="blog-content">
+
+
+    <div class="page-header__overlay"></div>
+
+
+
+  <div class="page-header__content">
+    <h1>Регистрация</h1>
+        <p>
+            <a href="/">Главная</a> →
+            <span style="color: #cfc3c3">Регистрация</span>
+        </p>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="verify-page">
+    <div class="verify-card">
+        <div style="margin-bottom: 20px;">
+
+        </div>
+
+        <h2>Подтверждение</h2>
+        <p>Мы отправили 4-значный код на вашу почту. Введите его ниже для активации аккаунта.</p>
+
+        {% if error %}
+            <div class="msg msg-error">
+                <i class="fa-solid fa-circle-exclamation"></i> {{ error }}
+            </div>
+        {% endif %}
+
+        {% if message %}
+            <div class="msg msg-success">
+                <i class="fa-solid fa-circle-check"></i> {{ message }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'verify_code' %}">
+            {% csrf_token %}
+            <div class="code-input-group">
+                <input type="text" name="code" placeholder="0000" maxlength="4" pattern="\d{4}" required autocomplete="one-time-code">
+            </div>
+            <button type="submit" class="btn-verify">Подтвердить код</button>
+        </form>
+
+        <div class="resend-container">
+            <span style="color: #94a3b8; font-size: 14px;">Не получили код?</span><br>
+            <a href="{% url 'resend_code' %}" class="resend-link">
+                <i class="fa-solid fa-rotate-right" style="font-size: 12px;"></i> Отправить повторно
+            </a>
+        </div>
+    <a href="{% url 'register' %}" class="btn-back">
+    <i class="fa-solid fa-chevron-left"></i> Назад
+</a>
+    </div>
+</div>
+{% endblock %}

@@ -2,103 +2,184 @@
 
 {% block content %}
 
-        <style>
-.blog-content{
-position: relative;
-height: 320px;
-background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
-background-size: cover;
-background-repeat: no-repeat;
+<style>
 
-background-position: center 25%;
+    :root {
+        --primary-blue: #007bff;
+        --dark-blue: #1a2a6c;
+        --light-gray: #f8f9fa;
+        --text-color: #4a4a4a;
+        --white: #ffffff;
+    }
 
+    .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
 
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
 
+        {#backdrop-filter: blur(2px);#}
+    }
 
-}
-{#    .page-header__overlay {#}
-{#    position: absolute;#}
-{#    inset: 0;#}
-{#    background: rgba(69, 173, 243, 0.55); }#}
-
-
-.page-header__content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    padding: 150px 60px;
-}
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
 
 .page-header__content h1 {
-    font-size: 52px;
+    font-size: 48px;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .page-header__content p {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 18px;
+
 }
 
 .page-header__content a {
-    color: #fff;
+    color: #ffffff;
+
     text-decoration: none;
 }
 
-.doctor-container{
-    width: 98%;
-   margin: 30px 30px;
-  display: flex;
-    text-align: center;
 
-}
-.doctor-container-content img{
-    width: 700px;
-    height: 500px;
-    justify-content: center;
-    backdrop-filter: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .doctor-container {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
 
+    .doctor-container-content {
+        display: flex;
+        gap: 50px;
+        background: var(--white);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* Жумшак көлөкө */
+        align-items: flex-start;
+        transition: transform 0.3s ease;
+        animation: slideUp 0.8s ease-out;
+    }
 
-}
-.doctor-container-content-text{
-    float: right;
-    width: 700px;
-
-}
-.doctor-container-content-text h2{
-    {#margin-left: 200px;#}
-    {#font-family: "Segoe UI", system-ui, sans-serif;#}
-    font-size: 35px;
-    margin-bottom: 10px;
-}
-.doctor-container-content-text h6{
-    margin-left: 20px;
-font-weight: 500;
-    font-size: 25px;
+    .doctor-container-content:hover {
+        transform: translateY(-5px);
+    }
 
 
-}
-.doctor-container-content-text p{
-margin-top: 10px;
-    font-size: 20px;
-    line-height: 1.5;
-    margin-bottom: 10px;
+    .doctor-container-content img {
+        width: 450px;
+        height: 550px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
 
-}
-.doctor-container-content-text a{
-    font-size: 20px;
-    font-weight: 550;
-    background: #0f87c7;
-    color: white;
-    border-radius: 5px;
-   margin-top: 5px;
-    display: inline-block;
-        margin-bottom: 10px;
-    height: 35px;
-    width: 120px;
-    padding-top: 5px;
-}
-    </style>
+    .doctor-container-content-text {
+        flex: 1;
+        padding-top: 10px;
+    }
+
+    .doctor-container-content-text h2 {
+        font-size: 40px;
+        color: var(--dark-blue);
+        margin-bottom: 20px;
+        font-weight: 700;
+        border-bottom: 3px solid var(--primary-blue);
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+
+    .doctor-container-content-text h6 {
+        font-size: 18px;
+        color: var(--primary-blue);
+        margin: 10px 0;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+    }
+
+    .doctor-container-content-text h6 strong {
+        color: var(--dark-blue);
+        margin-right: 10px;
+    }
+
+    .doctor-container-content-text p {
+        font-size: 17px;
+        color: var(--text-color);
+        line-height: 1.8;
+        margin-top: 25px;
+        background: #f9f9f9;
+        padding: 20px;
+        border-left: 4px solid var(--primary-blue);
+        border-radius: 5px;
+    }
+
+
+    .doctor-container-content-text a {
+        margin-top: 30px;
+        display: inline-block;
+        background: linear-gradient(135deg, #0f87c7, #065a82);
+        color: white;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(15, 135, 199, 0.3);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .doctor-container-content-text a:hover {
+        background: linear-gradient(135deg, #065a82, #0f87c7);
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(15, 135, 199, 0.4);
+    }
+
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+
+    @media (max-width: 992px) {
+        .doctor-container-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .doctor-container-content img {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+        }
+        .doctor-container-content-text p {
+            text-align: left;
+        }
+    }
+</style>
 
 
 

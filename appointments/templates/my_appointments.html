@@ -1,144 +1,239 @@
 {% extends 'base.html' %}
 {% block content %}
 
-        <style>
-.blog-content{
-position: relative;
-height: 320px;
-background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
-background-size: cover;
-background-repeat: no-repeat;
+<style>
 
-background-position: center 25%;
-
-
-
-
-}
-{#    .page-header__overlay {#}
-{#    position: absolute;#}
-{#    inset: 0;#}
-{#    background: rgba(69, 173, 243, 0.55); }#}
+    :root {
+        --primary-color: #007bff;
+        --accent-color: #00d2ff;
+        --text-dark: #2d3436;
+        --text-gray: #636e72;
+        --bg-light: #f4f7f6;
+        --danger: #ff7675;
+    }
 
 
-.page-header__content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    padding: 150px 60px;
-}
+      .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
+
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
+
+        {#backdrop-filter: blur(2px);#}
+    }
+
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
 
 .page-header__content h1 {
-    font-size: 52px;
+    font-size: 48px;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .page-header__content p {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 18px;
+
 }
 
 .page-header__content a {
-    color: #fff;
+    color: #ffffff;
+
     text-decoration: none;
 }
 
-.btn-block{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
 
-}
-.btn-block_{
-    width: 60%;
-   margin-bottom: 20px;
-    margin-top: 25px;
+    .btn-block {
+        background-color: var(--bg-light);
+        padding: 80px 0;
+        display: flex;
+        justify-content: center;
+    }
 
-}
-.btn-block_ h2{
-    font-size: 30px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    margin-bottom: 18px;
+    .btn-block_ {
+        width: 90%;
+        max-width: 1100px;
+        text-align: center;
+    }
 
 
-}
-.btn-block_ p{
-color: #707070;
-    font-size: 19px;
-    font-family: "Segoe UI", system-ui, sans-serif;
+    .btn-block_ h2 {
+        font-size: 42px;
+        color: var(--text-dark);
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
 
-}
-.btn-block_conf{
-    max-width: 1000px;
-    padding: 20px 30px;
-    margin: 40px auto;
-    background: white;
-box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    font-size: 23px;
+    .btn-block_ h2::after {
+        content: "";
+        width: 80px;
+        height: 4px;
+        background: var(--primary-color);
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
 
-
-
-}
-.btn-block_conf_a{
-    color: #0707ed;
-}
-    </style>
-
-
-
-<div class="blog" >
-<div class="blog-content">
-
-
-    <div class="page-header__overlay"></div>
+    .btn-block_ p {
+        color: var(--text-gray);
+        font-size: 20px;
+        line-height: 1.6;
+        margin: 30px auto 50px;
+        max-width: 800px;
+    }
 
 
+    .btn-block_conf {
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+    }
 
-  <div class="page-header__content">
-    <h1>Запись</h1>
-        <p>
-            <a href="/">Главная</a> →
-            <span style="color: #cfc3c3">Запись</span>
-        </p>
+    ol {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 20px;
+    }
+
+    li {
+        background: #fff;
+        padding: 25px 35px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    li:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,123,255,0.12);
+    }
+
+
+    .appointment-info {
+        text-align: left;
+    }
+
+    .doctor-name {
+        display: block;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 5px;
+    }
+
+    .patient-detail {
+        color: var(--text-gray);
+        font-size: 16px;
+    }
+
+    .date-time {
+        margin-left: 20px;
+        font-weight: 600;
+        color: var(--primary-color);
+        background: rgba(0,123,255,0.08);
+        padding: 5px 15px;
+        border-radius: 30px;
+    }
+
+
+    .btn-cancel {
+        background: #fff;
+        color: var(--danger);
+        border: 2px solid var(--danger);
+        padding: 10px 25px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .btn-cancel:hover {
+        background: var(--danger);
+        color: #fff;
+        box-shadow: 0 5px 15px rgba(255, 118, 117, 0.4);
+    }
+
+
+    .empty-state {
+        background: #fff;
+        padding: 60px;
+        border-radius: 20px;
+        color: var(--text-gray);
+        font-size: 22px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+
+    @media (max-width: 768px) {
+        li {
+            flex-direction: column;
+            text-align: center;
+            gap: 20px;
+        }
+        .appointment-info { text-align: center; }
+        .page-header__content h1 { font-size: 38px; }
+    }
+</style>
+
+<div class="blog">
+    <div class="blog-content">
+        <div class="page-header__overlay"></div>
+        <div class="page-header__content">
+            <h1>Личный кабинет</h1>
+            <p>
+                <a href="/">Главная</a> →
+                <span style="color: #cfc3c3">Мои записи</span>
+            </p>
+        </div>
     </div>
 </div>
-</div>
 
-    <div class="btn-block">
-
+<div class="btn-block">
     <div class="btn-block_">
+        <h2>Мои подписки</h2>
+        <p>Управляйте вашими записями к специалистам. Здесь вы можете просмотреть детали визита или отменить запись в случае изменения планов.</p>
 
-
-
-
-<h2>Мои подписки</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eligendi facere facilis hic ipsam iste molestiae nostrum omnis repudiandae sint.</p>
-
-
-
-    <div class="btn-block_conf">
-
-
-    {% for a in appointments %}
-
-     <ol>
-        <li>{{ a.doctor.name }} - {{ a.patient_name }} {{ a.patient }} / {{ a.date }} /
-        {{ a.time }}
-
-            <a class="btn-block_conf_a" href="{% url 'appointments:delete' a.id %}">Отменить</a>
-        </li>
-     </ol>
-    {% empty %}
-    <ol>
-        <li colspan="4">Подписки пока нет.</li>
-    </ol>
-
-    {% endfor %}
-
+        <div class="btn-block_conf">
+            <ol>
+                {% for a in appointments %}
+                <li>
+                    <div class="appointment-info">
+                        <span class="doctor-name">👨‍⚕️ {{ a.doctor.name }}</span>
+                        <span class="patient-detail">Пациент: <strong>{{ a.patient_name }}</strong></span>
+                        <span class="date-time">📅 {{ a.date }} в {{ a.time }}</span>
+                    </div>
+                    <a class="btn-cancel" href="{% url 'appointments:delete' a.id %}">Отменить запись</a>
+                </li>
+                {% empty %}
+                <div class="empty-state">
+                    <p>📭 У вас пока нет активных подписок.</p>
+                </div>
+                {% endfor %}
+            </ol>
+        </div>
     </div>
-    </div>
-    </div>
+</div>
 
 {% endblock %}

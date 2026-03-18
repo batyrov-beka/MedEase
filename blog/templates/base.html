@@ -3,7 +3,10 @@
 
 {% extends 'index.html' %}
 {% block content %}
-    <header>
+
+
+
+    <header class="header-none">
     <div class="hero">
 
 
@@ -101,7 +104,7 @@
         <div class="free-container">
     <div class="free-container-conf">
         <h1 class="title1">Все виды диагностики</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Maiores, quibusdam.</p>
+            <p>Пройдите полное обследование в одном месте. Мы обеспечиваем высокую точность результатов благодаря использованию передовых технологий и опыту наших ведущих специалистов.</p>
         <a class="btn" href="{% url 'contact' %}">Бесплатный консультация</a>
     </div>
     </div>
@@ -118,49 +121,65 @@
     <p>В нашей клинике вы можете получить лучшие и самые разнообразные диагностические услуги в регионе. Заходите на наш сайт, чтобы узнать больше.</p>
 
 
+
+
+
 <div class="main-container-ee">
 <div class="main-container-conf-1">
     <img class="main-container-img" src="../static/css/img/pre.jpg" alt="">
-    <a class="main-container-a" href="{% url 'categories' %}">Педиатр</a>
+
+       <p class="doctor-bio">Универсальный врач для детей. Следит за ростом, весом, делает прививки и лечит типичные детские болезни.</p>
+       <a class="main-container-a" href="{% url 'categories' %}"> Педиатр</a>
+
+
+
 </div>
 
 <div class="main-container-conf-1">
       <img class="main-container-img" src="../static/css/img/hirurg1.jpg" alt="">
+    <p class="doctor-bio">Лечит травмы, гнойные воспаления и болезни, которые нельзя вылечить только таблетками (нужна операция или перевязка).</p>
      <a class="main-container-a" href="{% url 'categories' %}">Хирург</a>
 </div>
 
 <div class="main-container-conf-1">
       <img class="main-container-img" src="../static/css/img/952019fa9c573904c4e3db649ef83f19.jpg" alt="">
+    <p class="doctor-bio">Отвечает за сердце и сосуды. К нему идут при болях в груди, одышке и проблемах с давлением.</p>
     <a class="main-container-a" href="{% url 'categories' %}">Кардиолог</a>
 </div>
 
 <div class="main-container-conf-1">
     <img class="main-container-img" src="../static/css/img/13a2822d25c4434d371ec2981883ce3f.jpg" alt="">
+    <p class="doctor-bio">Борется с «заразными» болезнями: от гриппа и кишечных инфекций до серьезных вирусов и паразитов.</p>
   <a class="main-container-a" href="{% url 'categories' %}">Инфекционист</a>
 </div>
 
 <div class="main-container-conf-1">
 <img class="main-container-img" src="../static/css/img/anesthesiologist.webp" alt="">
+    <p class="doctor-bio">Работает в реанимации. Поддерживает жизнь пациента, когда его органы (сердце, легкие) перестают работать сами.</p>
     <a class="main-container-a" href="{% url 'categories' %}">Реаниматолог</a>
 </div>
 
 <div class="main-container-conf-1">
 <img class="main-container-img" src="../static/css/img/b26128ee5998ea789c20ef44c689d6c4.jpg" alt="">
+    <p class="doctor-bio">Лечит всё, что связано с пищеварением: желудок, кишечник, печень и поджелудочную железу.</p>
     <a class="main-container-a" href="{% url 'categories' %}">Гастроэнтеролог</a>
 </div>
 
 <div class="main-container-conf-1">
 <img class="main-container-img" src="../static/css/img/chto-lechit-ortoped.jpg.pagespeed.ce_.zymofn6uhl.jpg" alt="">
+    <p class="doctor-bio">Исправляет проблемы с осанкой, плоскостопием и лечит хронические болезни суставов и костей.</p>
   <a class="main-container-a" href="{% url 'categories' %}">Ортопед</a>
 </div>
 
 <div class="main-container-conf-1">
 <img class="main-container-img" src="../static/css/img/bbaebc996bbceddcdb0a6c7d3e075af4.jpg" alt="">
+    <p class="doctor-bio">Специалист по трем органам: ухо, горло и нос. Лечит насморк, гайморит, ангину и боли в ушах.</p>
     <a class="main-container-a" href="{% url 'categories' %}">Лор</a>
 </div>
 
 <div class="main-container-conf-1">
 <img class="main-container-img" src="../static/css/img/EnMitUqXIA4inBE.jpg" alt="">
+    <p class="doctor-bio">Проверяет зрение, лечит воспаления глаз и подбирает очки или линзы.</p>
   <a class="main-container-a" href="{% url 'categories' %}">Офтальмолог</a>
 </div>
     </div>

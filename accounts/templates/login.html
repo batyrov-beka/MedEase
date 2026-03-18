@@ -2,46 +2,156 @@
 {% block content %}
 
         <style>
-.blog-content{
-position: relative;
-height: 320px;
-background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
-background-size: cover;
-background-repeat: no-repeat;
+    .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
 
-background-position: center 25%;
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
 
+        {#backdrop-filter: blur(2px);#}
+    }
 
-
-
-}
-{#    .page-header__overlay {#}
-{#    position: absolute;#}
-{#    inset: 0;#}
-{#    background: rgba(69, 173, 243, 0.55); }#}
-
-
-.page-header__content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    padding: 150px 60px;
-}
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
 
 .page-header__content h1 {
-    font-size: 52px;
+    font-size: 48px;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .page-header__content p {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 18px;
+
 }
 
 .page-header__content a {
-    color: #fff;
+    color: #ffffff;
+
     text-decoration: none;
 }
+
+
+
+
+
+
+.login-box {
+    width: 400px;
+    margin: 80px auto;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.login-box input:focus {
+    border-color: #00b3b3;
+    box-shadow: 0 0 12px rgba(0,179,179,0.4);
+}
+
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #008080, #00c6c6);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.login-box button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+
+.error-message {
+    background: rgba(255, 0, 0, 0.1);
+    color: #cc0000;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.login-box a {
+    color: #008080;
+    text-decoration: none;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+}
+.password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .password-container input {
+        width: 100%;
+        padding-right: 40px;
+    }
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        cursor: pointer;
+        color: #999;
+        z-index: 10;
+        transition: 0.3s;
+    }
+    .toggle-password:hover {
+        color: #00a884;
+    }
+    .error-message {
+        color: white;
+        background-color: #ff4d4d;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
     </style>
 
 
@@ -67,19 +177,48 @@ background-position: center 25%;
 
 
 
-<div style="width:400px; margin:80px auto; padding:40px;">
+<div class="login-box">
     <h2>Вход</h2>
+
     {% if error %}
-        <p style="color:red;">{{ error }}</p>
+        <div class="error-message">
+            {{ error }}
+        </div>
     {% endif %}
+
     <form method="post">
         {% csrf_token %}
-        <p>Имя пользователя:</p>
-        <input type="text" name="username">
-        <p>Пароль:</p>
-        <input type="password" name="password">
-        <button type="submit" style="background:#008080; color:white; padding:10px;">Войти</button>
+
+        <p>Имя пользователя</p>
+        <input type="text" name="username" placeholder="Введите имя пользователя" required>
+
+        <p>Пароль</p>
+        <div class="password-container">
+            <input type="password" name="password" id="id_login_password" placeholder="Введите пароль" required>
+            <i class="fa-solid fa-eye toggle-password" id="toggleLoginPassword"></i>
+        </div>
+
+        <button type="submit" style="margin-top: 20px;">Войти</button>
     </form>
-    <p>Нет аккаунта? <a href="/accounts/register/">Регистрация</a></p>
+
+    <p style="text-align:center; margin-top:15px;">
+        Нет аккаунта? <a href="/accounts/register/">Регистрация</a>
+    </p>
 </div>
+
+<script>
+    const toggleBtn = document.querySelector('#toggleLoginPassword');
+    const passwordInput = document.querySelector('#id_login_password');
+
+    toggleBtn.addEventListener('click', function () {
+
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+
 {% endblock %}

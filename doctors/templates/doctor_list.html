@@ -1,171 +1,254 @@
 {% extends 'base.html' %}
 {% block content %}
 
-            <style>
-.blog-content{
-position: relative;
-height: 320px;
-background-image: url(https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg);
-background-size: cover;
-background-repeat: no-repeat;
+<style>
+    :root {
+        --primary: #0f87c7;
+        --dark: #1a2b3c;
+        --light-bg: #f4f7f9;
+        --white: #ffffff;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
-background-position: center 25%;
+    .blog-content {
+        position: relative;
+        height: 350px;
+        background: url('https://static.vecteezy.com/system/resources/previews/030/492/343/large_2x/scientist-working-in-laboratory-young-male-researcher-carrying-out-scientific-research-in-a-lab-ai-generated-free-photo.jpg') no-repeat center 25%;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+    }
 
+  .page-header__overlay {
+        position: absolute;
+        inset: 0;
 
+        {#backdrop-filter: blur(2px);#}
+    }
 
-
-}
-{#    .page-header__overlay {#}
-{#    position: absolute;#}
-{#    inset: 0;#}
-{#    background: rgba(69, 173, 243, 0.55); }#}
-
-
-.page-header__content {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    padding: 150px 60px;
-}
+ .page-header__content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 150px 60px;
+        text-decoration: none;
+    }
 
 .page-header__content h1 {
-    font-size: 52px;
+    font-size: 48px;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .page-header__content p {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 18px;
+
 }
 
 .page-header__content a {
-    color: #fff;
+    color: #ffffff;
+
     text-decoration: none;
 }
 
 
+    .btn-blog {
+        width: 100%;
+        padding: 60px 0;
+    }
 
-.btn-blog{
-   display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 60px;
-    background: white;
+    .container-blog {
+        width: 90%;
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+    }
 
-}
+    .container-blog h2 {
+        font-size: clamp(28px, 4vw, 42px);
+        color: var(--dark);
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
 
-
-
-.container-blog{
-   display: inline;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-}
-
-.doctors{
-     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    width: 100%;
-    justify-items: center;
-
-}
-.container-blog h2{
-    font-size: 40px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-
-img{
-width: 350px;
-    border-radius: 10px ;
-background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    height: 300px;
-}
-    .btn-blog-p{
-           display: inline-block;
-        font-size: 20px;
-        width: 750px;
+    .btn-blog-p {
+        max-width: 800px;
+        margin: 0 auto 50px;
+        font-size: 18px;
         color: #666;
-        margin-bottom: 40px;
+        line-height: 1.6;
     }
-    .doctors a{
-        background: #0f87c7;
-        color: white;
-        {#width: 150px;#}
+
+
+    .doctors {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        justify-content: center; /* Сетканын өзүн ортого коёт */
+        justify-items: center;  /* Карточкаларды ичинен ортого коёт */
+    }
+
+
+    .card {
+        background: var(--white);
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .card:hover {
+        transform: translateY(-12px);
+    }
+
+
+    .img-container {
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         display: block;
-        height: 35px;
-        border-radius: 5px;
-        padding-right: 5px;
-        padding-top: 3px;
-         font-size: 19px;
-    font-weight: 500;
-        margin-top: 25px;
-        margin-bottom: 50px;
+        transition: transform 0.6s ease;
     }
-    </style>
+
+    .card:hover .img-container img {
+        transform: scale(1.1);
+    }
 
 
+    .card-info {
+        padding: 30px 20px;
+        background: var(--white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-grow: 1;
+    }
 
-<div class="blog" >
-<div class="blog-content">
+    .card-info h3 {
+        font-size: 24px;
+        color: var(--dark);
+        margin: 0 0 10px 0;
+        font-weight: 700;
+    }
+
+    .specialty-tag {
+        display: inline-block;
+        padding: 6px 16px;
+        background: #eef7ff;
+        color: var(--primary);
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .card-link {
+        text-decoration: none;
+        background: var(--primary);
+        color: var(--white);
+        width: 100%;
+        max-width: 200px;
+        padding: 12px 0;
+        border-radius: 12px;
+        font-weight: 600;
+        border: 2px solid var(--primary);
+        transition: var(--transition);
+    }
+
+    .card-link:hover {
+        background: white;
+        border-color: var(--dark);
+    }
 
 
-    <div class="page-header__overlay"></div>
+    @media (max-width: 1024px) {
+        .doctors {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
 
+    @media (max-width: 768px) {
+        .doctors {
+            grid-template-columns: 1fr;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
+        .card {
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+        }
 
-  <div class="page-header__content">
-    <h1>Врачи</h1>
-        <p>
-            <a href="/">Главная</a> →
-            <span style="color: #cfc3c3">Врачи</span>
-        </p>
+        .img-container {
+            height: 320px;
+        }
+    }
+</style>
+
+<div class="blog">
+    <div class="blog-content">
+        <div class="page-header__content">
+            <h1>Наши врачи</h1>
+            <p>
+                <a href="/">Главная</a> →
+                <span style="color: #ccc">Врачи</span>
+            </p>
+        </div>
     </div>
 </div>
-</div>
-
-
-
-
-
-
 
 <div class="btn-blog">
-<div class="container-blog">
-<h2 >Наши врачи</h2>
-    <p class="btn-blog-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias aliquid dolorem fugiat incidunt ipsa maxime nam, nesciunt nostrum quo!</p>
+    <div class="container-blog">
+        <h2>Специалисты нашей клиники</h2>
+        <p class="btn-blog-p">
+            Наши эксперты готовы предоставить вам качественную медицинскую помощь.
+        </p>
 
+        <div class="doctors">
+            {% for d in doctors %}
+            <div class="card">
+                <div class="img-container">
+                    {% if d.photo %}
+                        <img src="{{ d.photo.url }}" alt="{{ d.name }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x500?text=Фото" alt="Нет фото">
+                    {% endif %}
+                </div>
 
+                <div class="card-info">
+                    <h3>{{ d.name }}</h3>
+                    <span class="specialty-tag">{{ d.specialty|default:"Врач" }}</span>
 
-
-<div class="doctors">
-{% for d in doctors %}
-<div class="card">
-
-    {% if d.photo %}
-        <img src="{{ d.photo.url }}">
-    {% endif %}
-
-    <a href="{% url 'doctors:detail' d.id %}">
-        <h3 style="font-size: 27px">{{ d.name }}</h3>
-    </a>
-
-{#    <p style="font-size: 23px">{{ d.specialty }}</p>#}
-{#    <p style="font-size: 15px">Опыт: {{ d.experience }} год</p>#}
-
-</div>
-{% empty %}
-<p>Врачей найти не удалось.</p>
-{% endfor %}
- </div>
-</div>
+                    <a href="{% url 'doctors:detail' d.id %}" class="card-link">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p>Врачи не найдены.</p>
+            {% endfor %}
+        </div>
     </div>
+</div>
+
 {% endblock %}

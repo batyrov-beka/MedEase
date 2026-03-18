@@ -20,9 +20,9 @@
             </button>
 
 
-            <h2 class="site-title">
+            <a  href="/"><h2 class="site-title">
                 <i class="fas fa-heartbeat"></i> Медицина
-            </h2>
+            </h2> </a>
 
             <button class="search-btn">
                 <i class="fas fa-search"></i>
@@ -41,14 +41,19 @@
                 <a href="/accounts/login/">Войти</a>
             </nav>
 
-{#            <nav class="side-menu" id="sideMenu">#}
-{#                <a href="/">Главная</a>#}
-{#                <a href="{% url 'profile' %}">Профиль</a>#}
-{#                <a href="/doctors">Врачи</a>#}
-{#                <a href="">Расписание</a>#}
-{#                <a href="/appointments">Запись</a>#}
-{#                <a href="/accounts/login/">Войти</a>#}
-{#            </nav>#}
+
+
+            <nav class="side-menu" id="sideMenu">
+                 <a href="/">Главная</a>
+                <a href="{% url 'profile' %}">Профиль</a>
+                 <a href="{% url 'doctors:doctor_list' %}">Врачи</a>
+                <a href="{% url 'about' %}">Расписание</a>
+                 <a href="{% url 'appointments:my' %}">Запись</a>
+                    {% if user.is_authenticated and user.doctor_id %}
+                        <a href="{% url 'doctors:dashboard' %}">Доктор панель</a>
+                    {% endif %}
+                 <a href="/accounts/login/">Войти</a>
+                </nav>
 
         </div>
     </div>
@@ -78,15 +83,19 @@
              <p> <i class="fa-solid fa-message"></i>  info@gmail.com</p>
         </div>
 
-        <div class="footer-content">
-<h4>Новостная рассылка</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, iusto!</p> <br>
-           <input class="input" type="text"  placeholder="Email:"> <button>Старт</button>
-        </div>
+<div class="footer-content">
+    <h4>Новостная рассылка</h4>
+    <p>Будьте в курсе самых важных событий и обновлений нашей клиники.</p> <br>
 
-{#<div class="footer-conf">#}
-{#        <h5>© 2025 MedEase — Онлайн медициналык система</h5>#}
-{#    </div>#}
+    <form id="newsletter-form" style="display: flex; gap: 5px; align-items: center;">
+        <input style="width: 100%;font-size: 15px;padding: 8px" class="input-btn" type="email" placeholder="Email:" required name="email" autocomplete="email">
+        <button style="font-size: 18px; padding: 6px" type="submit" id="submit-btn">Отправить</button>
+    </form>
+
+    <p id="msg" style="display: none; color: #4CAF50; margin-top: 10px; font-weight: bold;">Отправлено!</p>
+</div>
+
+
     </footer>
 
 
@@ -95,6 +104,43 @@
 
 
 <script>
+
+
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submit-btn');
+
+
+    btn.disabled = true;
+    btn.innerText = "...";
+
+
+    setTimeout(() => {
+        form.style.display = 'none';
+        msg.style.display = 'block';
+
+
+        setTimeout(() => {
+            form.reset();
+            form.style.display = 'flex';
+            msg.style.display = 'none';
+            btn.disabled = false;
+            btn.innerText = "Старт";
+        }, 3000);
+    }, 1000);
+});
+
+
+
+
+
+
+
+
+
   const slides = document.querySelectorAll('.bg-slide');
   let i = 0;
 
@@ -150,6 +196,39 @@ function eraseText() {
 }
 
 typeText();
+
+
+
+
+
+
+
+
+
+
+
+    // Бургер менюсу үчүн функция
+    function toggleMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        if (sideMenu) {
+            sideMenu.classList.toggle('active');
+        } else {
+            console.warn('sideMenu элементи табылган жок!');
+        }
+    }
+
+    // Менюнун сыртына басканда жабуу
+    document.addEventListener('click', function(e) {
+        const sideMenu = document.getElementById('sideMenu');
+        const burger = document.querySelector('.burger');
+
+        if (sideMenu && !sideMenu.contains(e.target) && !burger.contains(e.target)) {
+            sideMenu.classList.remove('active');
+        }
+    });
+
+
+
 
 
 

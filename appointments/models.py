@@ -14,6 +14,6 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.user.username} → {self.doctor.name} ({self.date} {self.time})"
-from django.db import models
+
 
 # Create your models here.
