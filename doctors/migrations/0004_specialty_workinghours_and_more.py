@@ -120,7 +120,6 @@ class Migration(migrations.Migration):
         ),
         migrations.RunPython(seed_specialties, migrations.RunPython.noop),
 
-        # specialty: текст -> внешний ключ
         migrations.RenameField('doctor', 'specialty', 'specialty_old'),
         migrations.AddField(
             model_name='doctor',

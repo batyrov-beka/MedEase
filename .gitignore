@@ -2,12 +2,10 @@
 __pycache__/
 *.pyc
 
-# Виртуальное окружение
 env/
 venv/
 .venv/
 
-# Секреты и локальные данные
 .env
 db.sqlite3
 staticfiles/

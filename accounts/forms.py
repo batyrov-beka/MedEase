@@ -31,7 +31,6 @@ class RegisterForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    """Вход по логину или по email."""
 
     username = forms.CharField(label='Логин или email', max_length=254,
                                widget=forms.TextInput(attrs={'autofocus': True, 'autocomplete': 'username'}))

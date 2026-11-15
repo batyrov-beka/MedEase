@@ -12,7 +12,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.profile_edit, name='profile_edit'),
 
-    # Смена пароля
     path('password/', auth_views.PasswordChangeView.as_view(
         template_name='accounts/password_change.html',
         success_url=reverse_lazy('password_change_done'),
@@ -21,7 +20,6 @@ urlpatterns = [
         template_name='accounts/password_change_done.html',
     ), name='password_change_done'),
 
-    # Восстановление пароля по email
     path('password-reset/', auth_views.PasswordResetView.as_view(
         template_name='accounts/password_reset.html',
         email_template_name='accounts/password_reset_email.txt',

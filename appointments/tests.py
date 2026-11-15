@@ -14,7 +14,6 @@ from .services import get_slots
 
 
 def next_weekday(weekday):
-    """Ближайшая будущая дата с заданным днём недели (не сегодня)."""
     day = timezone.localdate() + datetime.timedelta(days=1)
     while day.weekday() != weekday:
         day += datetime.timedelta(days=1)

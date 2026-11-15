@@ -1,9 +1,3 @@
-"""
-Настройки проекта MedEase.
-
-Секреты (SECRET_KEY, пароль почты) читаются из переменных окружения
-или из файла .env в корне проекта (см. .env.example).
-"""
 import os
 from pathlib import Path
 
@@ -11,7 +5,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def _load_dotenv(path):
-    """Простой загрузчик .env без внешних зависимостей."""
     if not path.exists():
         return
     for raw in path.read_text(encoding='utf-8').splitlines():
@@ -115,8 +108,6 @@ LOGOUT_REDIRECT_URL = 'home'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# ---------- Почта ----------
-# Если EMAIL_HOST_USER не задан — письма печатаются в консоль сервера.
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 if EMAIL_HOST_USER and EMAIL_HOST_PASSWORD:
@@ -130,7 +121,6 @@ else:
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER or 'MedEase <noreply@medease.local>')
 
 
-# ---------- Данные клиники (используются во всех шаблонах) ----------
 CLINIC = {
     'name': 'MedEase',
     'phone': '+996 557 631 771',
@@ -145,7 +135,6 @@ CLINIC = {
     ],
 }
 
-# Насколько вперёд (в днях) пациент может записаться
 BOOKING_DAYS_AHEAD = 30
 
 

@@ -55,7 +55,6 @@ def register_view(request):
                 'last_name': cd['last_name'],
                 'email': cd['email'],
                 'phone': cd.get('phone', ''),
-                # В сессии храним только хеш пароля, не сам пароль
                 'password_hash': make_password(cd['password1']),
                 'code': code,
                 'expires': time.time() + CODE_TTL_SECONDS,

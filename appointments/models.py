@@ -37,7 +37,6 @@ class Appointment(models.Model):
         verbose_name = 'Запись на приём'
         verbose_name_plural = 'Записи на приём'
         constraints = [
-            # Один врач — одно активное время. Отменённые записи слот не занимают.
             models.UniqueConstraint(
                 fields=['doctor', 'date', 'time'],
                 condition=~models.Q(status='cancelled'),

@@ -46,7 +46,6 @@ class Command(BaseCommand):
         if assign_specialties:
             specialties = list(Specialty.objects.filter(is_active=True).exclude(slug='terapevt'))
             therapists = Doctor.objects.filter(specialty__slug='terapevt').order_by('pk')
-            # Одного оставляем терапевтом, остальных распределяем
             for doctor, specialty in zip(therapists[1:], specialties):
                 doctor.specialty = specialty
                 doctor.save(update_fields=['specialty'])

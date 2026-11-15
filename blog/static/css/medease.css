@@ -1,8 +1,3 @@
-/* =========================================================
-   MedEase — общий стиль (шапка, футер, главная страница)
-   Переменные с префиксом --me-, чтобы не конфликтовать
-   со стилями внутри отдельных страниц.
-   ========================================================= */
 
 :root {
     --me-primary: #0f87c7;
@@ -61,7 +56,6 @@ img {
     padding: 0 24px;
 }
 
-/* ---------- Кнопки ---------- */
 
 .me-btn {
     display: inline-flex;
@@ -121,7 +115,6 @@ img {
     font-size: 14px;
 }
 
-/* ---------- Шапка ---------- */
 
 .me-header {
     position: fixed;
@@ -250,7 +243,6 @@ img {
     cursor: pointer;
 }
 
-/* Мобильное меню */
 .me-drawer-backdrop {
     position: fixed;
     inset: 0;
@@ -330,7 +322,6 @@ body.menu-open .me-drawer-backdrop {
     color: #fff;
 }
 
-/* ---------- Заголовки секций ---------- */
 
 .me-section {
     padding: 96px 0;
@@ -526,7 +517,6 @@ body.menu-open .me-drawer-backdrop {
     50% { transform: translateY(-8px); }
 }
 
-/* ---------- Быстрые карточки ---------- */
 
 .me-quick {
     position: relative;
@@ -648,7 +638,6 @@ body.menu-open .me-drawer-backdrop {
     margin: 4px 0 6px;
 }
 
-/* ---------- Преимущества ---------- */
 
 .me-features {
     display: grid;
@@ -695,7 +684,6 @@ body.menu-open .me-drawer-backdrop {
     font-size: 15.5px;
 }
 
-/* ---------- Как это работает ---------- */
 
 .me-steps {
     display: grid;
@@ -736,7 +724,6 @@ body.menu-open .me-drawer-backdrop {
     font-size: 15px;
 }
 
-/* ---------- CTA баннер ---------- */
 
 .me-cta {
     position: relative;
@@ -799,7 +786,6 @@ body.menu-open .me-drawer-backdrop {
     background-position: center;
 }
 
-/* ---------- Услуги ---------- */
 
 .me-services {
     display: grid;
@@ -889,7 +875,6 @@ body.menu-open .me-drawer-backdrop {
     transform: translateX(4px);
 }
 
-/* ---------- Карта / контакты ---------- */
 
 .me-location {
     display: grid;
@@ -959,7 +944,6 @@ body.menu-open .me-drawer-backdrop {
     box-shadow: var(--me-shadow);
 }
 
-/* ---------- Футер ---------- */
 
 .me-footer {
     background: var(--me-ink);
@@ -1078,7 +1062,6 @@ body.menu-open .me-drawer-backdrop {
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* ---------- Появление при прокрутке ---------- */
 
 .reveal {
     opacity: 0;
@@ -1097,7 +1080,6 @@ body.menu-open .me-drawer-backdrop {
     html { scroll-behavior: auto; }
 }
 
-/* ---------- Адаптив ---------- */
 
 @media (max-width: 1080px) {
     .me-nav a { padding: 8px 10px; font-size: 14.5px; }
@@ -1142,7 +1124,6 @@ body.menu-open .me-drawer-backdrop {
     .me-map { min-height: 300px; }
 }
 
-/* Логотип внутри мобильного меню */
 .me-drawer .me-logo {
     width: auto;
     padding: 0;

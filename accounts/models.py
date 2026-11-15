@@ -4,7 +4,6 @@ from django.utils import timezone
 
 
 class Profile(models.Model):
-    """Медицинская карта пациента (основные данные)."""
 
     class Gender(models.TextChoices):
         MALE = 'm', 'Мужской'

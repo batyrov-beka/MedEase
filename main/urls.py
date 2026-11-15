@@ -14,7 +14,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('doctors/', include('doctors.urls')),
     path('appointments/', include('appointments.urls')),
-    # Старый адрес списка врачей
     path('doctors/doctors/', RedirectView.as_view(pattern_name='doctors:list', permanent=True)),
 ]
 

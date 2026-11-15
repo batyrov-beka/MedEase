@@ -4,7 +4,6 @@ from django.urls import reverse
 
 
 class Specialty(models.Model):
-    """Медицинское направление (кардиология, педиатрия и т. д.)."""
 
     name = models.CharField('Название', max_length=100, unique=True)
     slug = models.SlugField('Адрес (slug)', max_length=100, unique=True)
@@ -92,7 +91,6 @@ class Doctor(models.Model):
 
 
 class WorkingHours(models.Model):
-    """Рабочие часы врача в конкретный день недели."""
 
     WEEKDAYS = [
         (0, 'Понедельник'), (1, 'Вторник'), (2, 'Среда'), (3, 'Четверг'),

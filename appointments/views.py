@@ -108,7 +108,6 @@ def my_appointments(request):
 
 
 def _get_for_user(request, pk):
-    """Запись доступна пациенту-владельцу, её врачу и персоналу."""
     appointment = get_object_or_404(Appointment.objects.select_related('doctor__specialty', 'user'), pk=pk)
     doctor = getattr(request.user, 'doctor', None)
     is_owner = appointment.user_id == request.user.id
@@ -165,7 +164,6 @@ def cancel_appointment(request, pk):
 @login_required
 @require_POST
 def set_status(request, pk):
-    """Врач меняет статус: подтвердить / завершить / неявка (отмена)."""
     appointment, can_manage = _get_for_user(request, pk)
     if not can_manage:
         raise Http404

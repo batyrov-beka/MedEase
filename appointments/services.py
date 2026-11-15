@@ -1,4 +1,3 @@
-"""Логика расписания: какие дни и время у врача свободны."""
 import datetime
 
 from django.conf import settings
@@ -13,7 +12,6 @@ def booking_window():
 
 
 def get_slots(doctor, day):
-    """Все слоты врача на день: [{'time': time, 'free': bool}]. Прошедшее время не возвращается."""
     hours = next((wh for wh in doctor.working_hours.all() if wh.weekday == day.weekday()), None)
     if hours is None:
         return []
@@ -42,7 +40,6 @@ def get_free_times(doctor, day):
 
 
 def get_booking_days(doctor):
-    """Ближайшие рабочие дни врача в пределах окна записи (с количеством свободных мест)."""
     start, end = booking_window()
     workdays = {wh.weekday for wh in doctor.working_hours.all()}
     days = []

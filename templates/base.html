@@ -167,7 +167,6 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Мобильное меню
     const burger = document.getElementById('burger');
     const setMenu = (open) => {
         document.body.classList.toggle('menu-open', open);
@@ -178,21 +177,18 @@
     document.getElementById('drawerBackdrop').addEventListener('click', () => setMenu(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
-    // Всплывающие сообщения: закрытие и автоскрытие
     document.querySelectorAll('.me-alert').forEach((el) => {
         const hide = () => { el.classList.add('is-hiding'); setTimeout(() => el.remove(), 300); };
         el.querySelector('[data-dismiss]').addEventListener('click', hide);
         setTimeout(hide, 6000);
     });
 
-    // Подтверждение опасных действий
     document.querySelectorAll('form[data-confirm]').forEach((form) => {
         form.addEventListener('submit', (e) => {
             if (!confirm(form.dataset.confirm)) e.preventDefault();
         });
     });
 
-    // Плавное появление блоков
     const items = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {

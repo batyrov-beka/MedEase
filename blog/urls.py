@@ -10,7 +10,6 @@ urlpatterns = [
     path('schedule/', views.schedule, name='schedule'),
     path('contact/', views.contact, name='contact'),
 
-    # Старые адреса — перенаправляем, чтобы ссылки не ломались
     path('about/', RedirectView.as_view(pattern_name='schedule', permanent=True)),
     path('categories/', RedirectView.as_view(pattern_name='services', permanent=True)),
 ]

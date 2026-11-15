@@ -2,7 +2,6 @@ from django.db import migrations
 
 
 def merge_names(apps, schema_editor):
-    """Раньше имя и фамилия хранились в двух полях (patient и patient_name) — объединяем в одно ФИО."""
     Appointment = apps.get_model('appointments', 'Appointment')
     for a in Appointment.objects.all():
         parts = [p.strip() for p in (a.patient or '', a.patient_name or '') if p and p.strip()]

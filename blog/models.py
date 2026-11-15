@@ -2,7 +2,6 @@ from django.db import models
 
 
 class ContactRequest(models.Model):
-    """Заявка на консультацию с сайта."""
 
     name = models.CharField('Имя', max_length=100)
     phone = models.CharField('Телефон', max_length=30)
