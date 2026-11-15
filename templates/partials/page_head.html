@@ -1,0 +1,11 @@
+<section class="me-page-head">
+    <div class="me-container">
+        <nav class="me-breadcrumbs" aria-label="Навигация">
+            <a href="{% url 'home' %}">Главная</a>
+            {% if parent_url %}<span><a href="{{ parent_url }}">{{ parent_title }}</a></span>{% endif %}
+            <span>{{ title }}</span>
+        </nav>
+        <h1>{{ title }}</h1>
+        {% if subtitle %}<p>{{ subtitle }}</p>{% endif %}
+    </div>
+</section>

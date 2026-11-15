@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Страница не найдена — MedEase{% endblock %}
+{% block content %}
+<section class="me-page-head" style="min-height:70vh;display:flex;align-items:center">
+    <div class="me-container" style="text-align:center">
+        <span class="me-eyebrow">Ошибка 404</span>
+        <h1 style="margin-top:16px">Страница не найдена</h1>
+        <p style="margin:12px auto 28px">Возможно, ссылка устарела или страница была перемещена.</p>
+        <a href="/" class="me-btn me-btn--primary">На главную</a>
+        <a href="/doctors/" class="me-btn me-btn--ghost">Записаться к врачу</a>
+    </div>
+</section>
+{% endblock %}

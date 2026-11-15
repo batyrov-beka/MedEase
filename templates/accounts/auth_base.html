@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="me-auth">
+    <div class="me-auth__aside" style="background-image:url('{% static 'css/img/455_1180x740_bdb.jpg' %}')">
+        <h2>{% block aside_title %}Ваше здоровье — в надёжных руках{% endblock %}</h2>
+        <p>Личный кабинет пациента MedEase:</p>
+        <ul>
+            <li><i class="fas fa-circle-check"></i> Онлайн-запись к врачу на свободное время</li>
+            <li><i class="fas fa-circle-check"></i> История приёмов и заключения врачей</li>
+            <li><i class="fas fa-circle-check"></i> Медицинская карта всегда под рукой</li>
+        </ul>
+    </div>
+    <div class="me-auth__main">
+        <div class="me-auth__box">
+            {% block box %}{% endblock %}
+        </div>
+    </div>
+</section>
+{% endblock %}

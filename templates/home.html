@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ===== Hero ===== -->
+<section class="me-hero">
+    <div class="me-container me-hero__grid">
+        <div>
+            <span class="me-eyebrow"><i class="fas fa-circle-check"></i> Многопрофильная клиника · г. Ош</span>
+            <h1>Забота о здоровье — <span>в пару кликов</span></h1>
+            <p class="me-hero__lead">
+                Выберите врача, посмотрите свободное время и запишитесь онлайн — без очередей и звонков.
+                После приёма заключение врача сохранится в вашем личном кабинете.
+            </p>
+            <div class="me-hero__cta">
+                <a href="{% url 'doctors:list' %}" class="me-btn me-btn--primary">
+                    <i class="fas fa-calendar-check"></i> Записаться к врачу
+                </a>
+                <a href="{% url 'services' %}" class="me-btn me-btn--ghost">Все направления</a>
+            </div>
+            <div class="me-hero__stats">
+                <div><strong>{{ specialty_total }}</strong><span>направлений</span></div>
+                <div><strong>{{ doctor_total }}</strong><span>врачей</span></div>
+                <div><strong>7 дней</strong><span>в неделю</span></div>
+            </div>
+        </div>
+
+        <div class="me-hero__media">
+            <img class="me-hero__img" src="{% static 'css/img/455_1180x740_bdb.jpg' %}" alt="Приём у врача в клинике MedEase">
+            <div class="me-float me-float--b">
+                <div class="me-float__icon"><i class="fas fa-user-doctor"></i></div>
+                <div><strong>Опытные врачи</strong><span>{{ specialty_total }} направлений</span></div>
+            </div>
+            <div class="me-float me-float--a">
+                <div class="me-float__icon"><i class="fas fa-clock"></i></div>
+                <div><strong>Онлайн-запись</strong><span>свободное время сразу видно</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Быстрые карточки ===== -->
+<section class="me-quick">
+    <div class="me-container me-quick__grid">
+        <a href="{% url 'schedule' %}" class="me-quick-card reveal">
+            <div class="me-quick-card__icon"><i class="fa-solid fa-clock"></i></div>
+            <h3>Часы работы</h3>
+            <ul class="me-hours">
+                {% for days, hours in clinic.hours %}<li>{{ days }} <b>{{ hours }}</b></li>{% endfor %}
+            </ul>
+        </a>
+
+        <a href="{% url 'schedule' %}" class="me-quick-card reveal">
+            <div class="me-quick-card__icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <h3>Расписание врачей</h3>
+            <p>Посмотрите, в какие дни и часы принимает нужный специалист.</p>
+            <span class="me-quick-card__more">Смотреть расписание <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <a href="{% url 'contact' %}" class="me-quick-card reveal">
+            <div class="me-quick-card__icon"><i class="fa-solid fa-comment-medical"></i></div>
+            <h3>Не знаете, к кому идти?</h3>
+            <p>Оставьте заявку — администратор подскажет нужного специалиста.</p>
+            <span class="me-quick-card__more">Получить консультацию <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <a href="tel:{{ clinic.phone_raw }}" class="me-quick-card me-quick-card--accent reveal">
+            <div class="me-quick-card__icon"><i class="fa-solid fa-phone"></i></div>
+            <h3>Регистратура</h3>
+            <span class="me-phone">{{ clinic.phone }}</span>
+            <p>При угрозе жизни звоните 103.</p>
+            <span class="me-quick-card__more">Позвонить <i class="fas fa-arrow-right"></i></span>
+        </a>
+    </div>
+</section>
+
+<!-- ===== Направления ===== -->
+<section class="me-section">
+    <div class="me-container">
+        <div class="me-section-head reveal">
+            <span class="me-eyebrow">Направления</span>
+            <h2>Чем мы можем помочь</h2>
+            <p>Специалисты по основным направлениям медицины — от первичного приёма терапевта до узких специалистов.</p>
+        </div>
+
+        <div class="me-services">
+            {% for s in specialties %}
+            <a href="{{ s.get_absolute_url }}" class="me-service reveal">
+                {% if s.image %}
+                <div class="me-service__img">
+                    <img src="{% static s.image %}" alt="{{ s.name }}" loading="lazy">
+                    <span class="me-service__tag"><i class="fas {{ s.icon }}"></i></span>
+                </div>
+                {% else %}
+                <div class="me-service__img me-service__img--icon"><i class="fas {{ s.icon }}"></i></div>
+                {% endif %}
+                <div class="me-service__body">
+                    <h3>{{ s.name }}</h3>
+                    <p>{{ s.short_description }}</p>
+                    <span class="me-service__link">Подробнее <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        {% if specialty_total > specialties|length %}
+        <div style="text-align:center;margin-top:36px">
+            <a href="{% url 'services' %}" class="me-btn me-btn--ghost">Все {{ specialty_total }} направлений <i class="fas fa-arrow-right"></i></a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ===== Врачи ===== -->
+{% if doctors %}
+<section class="me-section me-section--white">
+    <div class="me-container">
+        <div class="me-section-head reveal">
+            <span class="me-eyebrow">Команда</span>
+            <h2>Наши врачи</h2>
+            <p>Выберите специалиста и запишитесь на удобное время.</p>
+        </div>
+        <div class="me-doctors">
+            {% for doctor in doctors %}{% include 'partials/doctor_card.html' %}{% endfor %}
+        </div>
+        <div style="text-align:center;margin-top:36px">
+            <a href="{% url 'doctors:list' %}" class="me-btn me-btn--ghost">Все врачи <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== Как записаться ===== -->
+<section class="me-section">
+    <div class="me-container">
+        <div class="me-section-head reveal">
+            <span class="me-eyebrow">Просто и быстро</span>
+            <h2>Как записаться на приём</h2>
+            <p>Три шага — и вы уже записаны к врачу.</p>
+        </div>
+        <div class="me-steps">
+            <div class="me-step reveal">
+                <span class="me-step__num">1</span>
+                <h3>Выберите врача</h3>
+                <p>Найдите специалиста по направлению или по имени.</p>
+            </div>
+            <div class="me-step reveal">
+                <span class="me-step__num">2</span>
+                <h3>Выберите свободное время</h3>
+                <p>Сайт показывает только свободные окна в графике врача.</p>
+            </div>
+            <div class="me-step reveal">
+                <span class="me-step__num">3</span>
+                <h3>Приходите на приём</h3>
+                <p>После приёма заключение врача появится в разделе «Мои записи».</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Преимущества ===== -->
+<section class="me-section me-section--white">
+    <div class="me-container">
+        <div class="me-section-head reveal">
+            <span class="me-eyebrow">Почему MedEase</span>
+            <h2>Наши преимущества</h2>
+        </div>
+        <div class="me-features">
+            <div class="me-feature reveal">
+                <div class="me-feature__icon"><i class="fa-solid fa-stethoscope"></i></div>
+                <h3>Квалифицированные специалисты</h3>
+                <p>Врачи с подтверждённым опытом по основным направлениям медицины.</p>
+            </div>
+            <div class="me-feature reveal">
+                <div class="me-feature__icon"><i class="fa-solid fa-file-medical"></i></div>
+                <h3>История в личном кабинете</h3>
+                <p>Все записи и заключения врачей хранятся в одном месте — удобно показать на следующем приёме.</p>
+            </div>
+            <div class="me-feature reveal">
+                <div class="me-feature__icon"><i class="fa-solid fa-microscope"></i></div>
+                <h3>Современная диагностика</h3>
+                <p>Обследование и консультация специалиста в одной клинике, без поездок по городу.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="me-section">
+    <div class="me-container">
+        <div class="me-cta reveal">
+            <div class="me-cta__body">
+                <span class="me-eyebrow"><i class="fas fa-headset"></i> Бесплатная консультация</span>
+                <h2>Не знаете, к какому врачу записаться?</h2>
+                <p>Опишите, что вас беспокоит, — администратор перезвонит и подскажет нужного специалиста.</p>
+                <ul class="me-cta__list">
+                    <li><i class="fas fa-circle-check"></i> Перезвоним в рабочее время</li>
+                    <li><i class="fas fa-circle-check"></i> Поможем выбрать врача и время</li>
+                    <li><i class="fas fa-circle-check"></i> Ответим в WhatsApp</li>
+                </ul>
+                <a class="me-btn me-btn--light" href="{% url 'contact' %}">Оставить заявку <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="me-cta__media" style="background-image:url('{% static 'css/img/storyblocks-happy-doctor-standing-with-a-laptop_S8lrSrNa-z-1-1024x683.jpg' %}')" role="img" aria-label="Врач с ноутбуком"></div>
+        </div>
+    </div>
+</section>
+
+{% include 'partials/location.html' %}
+
+{% endblock %}

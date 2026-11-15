@@ -1,0 +1,18 @@
+{% extends 'accounts/auth_base.html' %}
+{% block title %}Вход — MedEase{% endblock %}
+{% block box %}
+<h1>Вход в кабинет</h1>
+<p>Войдите, чтобы записаться к врачу и посмотреть свои записи.</p>
+
+<form method="post" class="me-form" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% include 'partials/form_errors.html' %}
+    {% include 'partials/field.html' with field=form.username %}
+    {% include 'partials/field.html' with field=form.password %}
+    <div class="me-auth__row"><a href="{% url 'password_reset' %}">Забыли пароль?</a></div>
+    <button type="submit" class="me-btn me-btn--primary me-btn--block">Войти</button>
+</form>
+
+<p class="me-auth__alt">Нет аккаунта? <a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Зарегистрироваться</a></p>
+{% endblock %}

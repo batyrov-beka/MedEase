@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Медицинская карта — MedEase{% endblock %}
+{% block content %}
+{% url 'profile' as profile_url %}
+{% include 'partials/page_head.html' with title='Медицинская карта' subtitle='Эти данные видит только ваш лечащий врач. Они помогают подготовиться к приёму.' parent_url=profile_url parent_title='Личный кабинет' %}
+
+<section class="me-page-body">
+    <div class="me-container" style="max-width:860px">
+        <form method="post" class="me-card me-form" novalidate>
+            {% csrf_token %}
+            {% include 'partials/form_errors.html' with form=user_form %}
+            {% include 'partials/form_errors.html' with form=profile_form %}
+
+            <h3 class="me-section-title" style="margin:0">Личные данные</h3>
+            <div class="me-form-row">
+                {% include 'partials/field.html' with field=user_form.first_name %}
+                {% include 'partials/field.html' with field=user_form.last_name %}
+            </div>
+            <div class="me-form-row">
+                {% include 'partials/field.html' with field=user_form.email %}
+                {% include 'partials/field.html' with field=profile_form.phone %}
+            </div>
+            <div class="me-form-row">
+                {% include 'partials/field.html' with field=profile_form.birth_date %}
+                {% include 'partials/field.html' with field=profile_form.gender %}
+            </div>
+
+            <h3 class="me-section-title" style="margin:12px 0 0">Медицинские данные</h3>
+            <div class="me-form-row">
+                {% include 'partials/field.html' with field=profile_form.blood_type %}
+                <div></div>
+            </div>
+            {% include 'partials/field.html' with field=profile_form.allergies %}
+            {% include 'partials/field.html' with field=profile_form.chronic_conditions %}
+
+            <div class="me-form-actions">
+                <button type="submit" class="me-btn me-btn--primary"><i class="fas fa-floppy-disk"></i> Сохранить</button>
+                <a href="{% url 'profile' %}" class="me-btn me-btn--ghost">Отмена</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

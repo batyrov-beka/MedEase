@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Запись от {{ a.date|date:"d.m.Y" }} — MedEase{% endblock %}
+{% block content %}
+{% if can_manage %}{% url 'doctors:dashboard' as back_url %}{% with back_title='Панель врача' %}
+{% include 'partials/page_head.html' with title='Приём пациента' parent_url=back_url parent_title=back_title %}
+{% endwith %}{% else %}{% url 'appointments:my' as back_url %}
+{% include 'partials/page_head.html' with title='Запись на приём' parent_url=back_url parent_title='Мои записи' %}
+{% endif %}
+
+<section class="me-page-body">
+    <div class="me-container me-layout">
+        <div>
+            <div class="me-card">
+                <div class="me-card__title">
+                    <h2>{{ a.date|date:"j E Y, l" }} в {{ a.time|time:"H:i" }}</h2>
+                    {% include 'partials/status.html' %}
+                </div>
+                <ul class="me-kv" style="margin-top:0">
+                    <li><span>Пациент</span><b>{{ a.patient_name }}</b></li>
+                    {% if a.phone %}<li><span>Телефон</span><b><a href="tel:{{ a.phone }}">{{ a.phone }}</a></b></li>{% endif %}
+                    <li><span>Врач</span><b><a href="{{ a.doctor.get_absolute_url }}">{{ a.doctor.name }}</a></b></li>
+                    <li><span>Направление</span><b>{{ a.doctor.specialty.name }}</b></li>
+                    {% if a.doctor.price %}<li><span>Стоимость</span><b>{{ a.doctor.price|intcomma }} сом</b></li>{% endif %}
+                    <li><span>Запись создана</span><b>{{ a.created_at|date:"j E Y, H:i" }}</b></li>
+                </ul>
+            </div>
+
+            <div class="me-card">
+                <div class="me-card__title"><h2>Жалобы / причина обращения</h2></div>
+                <p class="me-prose">{{ a.reason|default:"Не указаны." }}</p>
+            </div>
+
+            <div class="me-card">
+                <div class="me-card__title"><h2><i class="fas fa-file-medical" style="color:var(--me-accent)"></i> Заключение врача</h2></div>
+                {% if can_manage and form %}
+                <form method="post" class="me-form">
+                    {% csrf_token %}
+                    {% include 'partials/field.html' with field=form.doctor_notes %}
+                    <div class="me-form-actions">
+                        {% if a.status != 'cancelled' and a.status != 'completed' %}
+                        <button type="submit" name="complete" value="1" class="me-btn me-btn--success"><i class="fas fa-circle-check"></i> Сохранить и завершить приём</button>
+                        {% endif %}
+                        <button type="submit" class="me-btn me-btn--ghost">Сохранить</button>
+                    </div>
+                </form>
+                {% elif a.doctor_notes %}
+                <div class="me-notes">{{ a.doctor_notes }}</div>
+                {% else %}
+                <p style="color:var(--me-muted)">Заключение появится здесь после приёма.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <aside class="me-sticky">
+            {% if can_manage %}
+            <div class="me-card">
+                <div class="me-card__title"><h3>Медицинская карта</h3></div>
+                {% if patient_profile %}
+                <ul class="me-kv" style="margin-top:0">
+                    <li><span>Возраст</span><b>{% if patient_profile.age is not None %}{{ patient_profile.age }}{% else %}—{% endif %}</b></li>
+                    <li><span>Пол</span><b>{{ patient_profile.get_gender_display|default:"—" }}</b></li>
+                    <li><span>Группа крови</span><b>{{ patient_profile.get_blood_type_display|default:"—" }}</b></li>
+                </ul>
+                <p style="margin-top:14px;font-size:14px;color:var(--me-muted)">Аллергии</p>
+                {% if patient_profile.allergies %}<span class="me-tag-warn">{{ patient_profile.allergies }}</span>{% else %}<b>нет данных</b>{% endif %}
+                <p style="margin-top:14px;font-size:14px;color:var(--me-muted)">Хронические заболевания</p>
+                <b>{{ patient_profile.chronic_conditions|default:"нет данных" }}</b>
+                {% else %}
+                <p style="color:var(--me-muted)">Пациент ещё не заполнил медицинскую карту.</p>
+                {% endif %}
+            </div>
+
+            {% if previous %}
+            <div class="me-card">
+                <div class="me-card__title"><h3>Предыдущие приёмы</h3></div>
+                <ul class="me-kv" style="margin-top:0">
+                    {% for p in previous %}
+                    <li><span>{{ p.date|date:"d.m.Y" }}</span><b><a href="{{ p.get_absolute_url }}">{{ p.doctor.specialty.name }}</a></b></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if a.is_active %}
+            <div class="me-card">
+                <div class="me-card__title"><h3>Действия</h3></div>
+                <div style="display:grid;gap:10px">
+                    {% if a.status == 'pending' %}
+                    <form method="post" action="{% url 'appointments:status' a.pk %}">{% csrf_token %}
+                        <input type="hidden" name="status" value="confirmed"><input type="hidden" name="next" value="{{ request.path }}">
+                        <button class="me-btn me-btn--primary me-btn--block" type="submit"><i class="fas fa-check"></i> Подтвердить запись</button>
+                    </form>
+                    {% endif %}
+                    <form method="post" action="{% url 'appointments:status' a.pk %}" data-confirm="Отметить запись как отменённую (пациент не пришёл)?">{% csrf_token %}
+                        <input type="hidden" name="status" value="cancelled"><input type="hidden" name="next" value="{{ request.path }}">
+                        <button class="me-btn me-btn--danger me-btn--block" type="submit">Отменить / неявка</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div class="me-card">
+                <div class="me-summary">
+                    <div class="me-summary__photo">{% with doctor=a.doctor %}{% include 'partials/avatar.html' %}{% endwith %}</div>
+                    <div><h3>{{ a.doctor.name }}</h3><p>{{ a.doctor.title }}</p></div>
+                </div>
+                {% if a.status == 'pending' %}
+                <div class="me-inline-alert me-inline-alert--info" style="margin:18px 0 0">Клиника подтвердит запись в рабочее время.</div>
+                {% elif a.status == 'confirmed' %}
+                <div class="me-inline-alert me-inline-alert--info" style="margin:18px 0 0">Запись подтверждена. Приходите за 10 минут до приёма.</div>
+                {% endif %}
+                <div style="display:grid;gap:10px;margin-top:18px">
+                    {% if a.can_cancel %}
+                    <form method="post" action="{% url 'appointments:cancel' a.pk %}" data-confirm="Отменить запись?">{% csrf_token %}
+                        <button class="me-btn me-btn--danger me-btn--block" type="submit">Отменить запись</button>
+                    </form>
+                    {% endif %}
+                    <a href="{% url 'appointments:book' a.doctor.pk %}" class="me-btn me-btn--ghost me-btn--block">Записаться повторно</a>
+                </div>
+            </div>
+            {% endif %}
+        </aside>
+    </div>
+</section>
+{% endblock %}

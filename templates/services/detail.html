@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ specialty.name }} — MedEase{% endblock %}
+{% block description %}{{ specialty.short_description }}{% endblock %}
+{% block content %}
+{% url 'services' as services_url %}
+{% include 'partials/page_head.html' with title=specialty.name subtitle=specialty.short_description parent_url=services_url parent_title='Направления' %}
+
+<section class="me-page-body">
+    <div class="me-container me-layout">
+        <div>
+            {% if specialty.image %}<img class="me-spec-cover" src="{% static specialty.image %}" alt="{{ specialty.name }}">{% endif %}
+            {% if specialty.description %}
+            <div class="me-card">
+                <div class="me-card__title"><h2>О направлении</h2></div>
+                <p class="me-prose">{{ specialty.description }}</p>
+            </div>
+            {% endif %}
+
+            <h2 class="me-section-title">Врачи направления «{{ specialty.name }}»</h2>
+            {% if doctors %}
+            <div class="me-doctors">
+                {% for doctor in doctors %}{% include 'partials/doctor_card.html' %}{% endfor %}
+            </div>
+            {% else %}
+            <div class="me-empty">
+                <i class="fas fa-user-doctor"></i>
+                <h3>Онлайн-запись к этому специалисту пока недоступна</h3>
+                <p>Оставьте заявку — администратор подберёт время приёма.</p>
+                <a href="{% url 'contact' %}" class="me-btn me-btn--primary">Оставить заявку</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <aside class="me-sticky">
+            <div class="me-card">
+                <div class="me-card__title"><h3>Другие направления</h3></div>
+                <ul class="me-spec-list">
+                    {% for s in others %}
+                    <li><a href="{{ s.get_absolute_url }}"><i class="fas {{ s.icon }}"></i> {{ s.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'services' %}" class="me-link" style="display:inline-block;margin-top:12px">Все направления →</a>
+            </div>
+            <div class="me-card">
+                <div class="me-card__title"><h3>Нужна помощь с выбором?</h3></div>
+                <p style="color:var(--me-muted);margin-bottom:16px">Позвоните в регистратуру — подскажем, к какому врачу записаться.</p>
+                <a href="tel:{{ clinic.phone_raw }}" class="me-btn me-btn--primary me-btn--block"><i class="fas fa-phone"></i> {{ clinic.phone }}</a>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

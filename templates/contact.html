@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Консультация и контакты — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Бесплатная консультация' subtitle='Опишите, что вас беспокоит, — администратор перезвонит, подскажет нужного специалиста и подберёт время.' %}
+
+<section class="me-page-body">
+    <div class="me-container me-layout">
+        <div class="me-card">
+            <div class="me-card__title"><h2>Оставить заявку</h2></div>
+            <form method="post" class="me-form" novalidate>
+                {% csrf_token %}
+                {% include 'partials/form_errors.html' %}
+                <div class="me-form-row">
+                    {% include 'partials/field.html' with field=form.name %}
+                    {% include 'partials/field.html' with field=form.phone %}
+                </div>
+                {% include 'partials/field.html' with field=form.message %}
+                <div class="me-form-actions">
+                    <button type="submit" class="me-btn me-btn--primary"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
+                    <a class="me-btn me-btn--ghost" target="_blank" rel="noopener"
+                       href="https://wa.me/{{ clinic.whatsapp }}?text=Здравствуйте!%20Хочу%20получить%20консультацию"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+                <small class="me-help">Отправляя заявку, вы соглашаетесь на обработку персональных данных для связи с вами.</small>
+            </form>
+        </div>
+
+        <aside>
+            <div class="me-card">
+                <div class="me-card__title"><h3>Контакты</h3></div>
+                <ul class="me-kv" style="margin-top:0">
+                    <li><span>Телефон</span><b><a href="tel:{{ clinic.phone_raw }}">{{ clinic.phone }}</a></b></li>
+                    <li><span>Email</span><b><a href="mailto:{{ clinic.email }}">{{ clinic.email }}</a></b></li>
+                    <li><span>Адрес</span><b>{{ clinic.city }}</b></li>
+                </ul>
+            </div>
+            <div class="me-card">
+                <div class="me-card__title"><h3>Режим работы</h3></div>
+                <ul class="me-hours">
+                    {% for days, hours in clinic.hours %}<li>{{ days }} <b>{{ hours }}</b></li>{% endfor %}
+                </ul>
+                <div class="me-inline-alert" style="margin:16px 0 0"><i class="fas fa-truck-medical"></i> При угрозе жизни звоните <b>103</b></div>
+            </div>
+        </aside>
+    </div>
+</section>
+
+{% include 'partials/location.html' %}
+{% endblock %}

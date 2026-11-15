@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Мои записи — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Мои записи' subtitle='Предстоящие приёмы и история посещений с заключениями врачей.' %}
+
+<section class="me-page-body">
+    <div class="me-container">
+        <div class="me-toolbar" style="margin-bottom:8px">
+            <h2 class="me-section-title" style="margin:0">Предстоящие</h2>
+            <a href="{% url 'doctors:list' %}" class="me-btn me-btn--primary me-btn--sm"><i class="fas fa-plus"></i> Новая запись</a>
+        </div>
+
+        {% if upcoming %}
+        <div class="me-appts" style="margin-top:16px">
+            {% for a in upcoming %}{% include 'partials/appointment_row.html' %}{% endfor %}
+        </div>
+        {% else %}
+        <div class="me-empty" style="margin-top:16px">
+            <i class="fas fa-calendar-plus"></i>
+            <h3>Нет предстоящих записей</h3>
+            <p>Выберите врача и запишитесь на удобное время.</p>
+            <a href="{% url 'doctors:list' %}" class="me-btn me-btn--primary">Записаться к врачу</a>
+        </div>
+        {% endif %}
+
+        {% if history %}
+        <h2 class="me-section-title">История</h2>
+        <div class="me-appts">
+            {% for a in history %}{% include 'partials/appointment_row.html' %}{% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

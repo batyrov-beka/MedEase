@@ -1,0 +1,23 @@
+<section class="me-section">
+    <div class="me-container me-location">
+        <div class="me-location__card reveal">
+            <span class="me-eyebrow"><i class="fas fa-location-dot"></i> Как нас найти</span>
+            <h3>Ждём вас в клинике</h3>
+            <div class="me-contact-row">
+                <i class="fas fa-location-dot"></i>
+                <div><small>Адрес</small><b>{{ clinic.city }}</b></div>
+            </div>
+            <div class="me-contact-row">
+                <i class="fas fa-phone"></i>
+                <div><small>Телефон</small><b><a href="tel:{{ clinic.phone_raw }}">{{ clinic.phone }}</a></b></div>
+            </div>
+            <div class="me-contact-row">
+                <i class="fas fa-envelope"></i>
+                <div><small>Email</small><b><a href="mailto:{{ clinic.email }}">{{ clinic.email }}</a></b></div>
+            </div>
+            <a href="https://wa.me/{{ clinic.whatsapp }}" target="_blank" rel="noopener" class="me-btn me-btn--primary"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+        </div>
+        <iframe class="me-map reveal" title="Карта: клиника MedEase, Ош" loading="lazy"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d97044.45847868908!2d72.810496!3d40.5274624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2skg!4v1744652897003!5m2!1sru!2skg"></iframe>
+    </div>
+</section>

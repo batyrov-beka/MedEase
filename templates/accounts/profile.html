@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Личный кабинет — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Личный кабинет' %}
+
+<section class="me-page-body">
+    <div class="me-container me-layout">
+        <div>
+            {% if user.doctor %}
+            <div class="me-inline-alert me-inline-alert--info" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                <span><i class="fas fa-briefcase-medical"></i> Вы вошли как врач: {{ user.doctor.name }}</span>
+                <a href="{% url 'doctors:dashboard' %}" class="me-btn me-btn--primary me-btn--sm">Открыть панель врача</a>
+            </div>
+            {% endif %}
+
+            <div class="me-stats" style="grid-template-columns:repeat(3,1fr)">
+                <div class="me-stat"><div class="me-stat__icon"><i class="fas fa-calendar-check"></i></div><div><b>{{ upcoming_count }}</b><small>предстоящих</small></div></div>
+                <div class="me-stat"><div class="me-stat__icon me-stat__icon--ok"><i class="fas fa-file-medical"></i></div><div><b>{{ completed_count }}</b><small>приёмов пройдено</small></div></div>
+                <div class="me-stat"><div class="me-stat__icon me-stat__icon--accent"><i class="fas fa-list"></i></div><div><b>{{ total_count }}</b><small>всего записей</small></div></div>
+            </div>
+
+            <div class="me-toolbar" style="margin-bottom:16px">
+                <h2 class="me-section-title" style="margin:0">Ближайшие приёмы</h2>
+                <a href="{% url 'appointments:my' %}" class="me-link">Все записи →</a>
+            </div>
+            {% if upcoming %}
+            <div class="me-appts">
+                {% for a in upcoming %}{% include 'partials/appointment_row.html' %}{% endfor %}
+            </div>
+            {% else %}
+            <div class="me-empty">
+                <i class="fas fa-calendar-plus"></i>
+                <h3>Нет предстоящих записей</h3>
+                <p>Запишитесь к врачу — свободное время видно сразу.</p>
+                <a href="{% url 'doctors:list' %}" class="me-btn me-btn--primary">Записаться к врачу</a>
+            </div>
+            {% endif %}
+
+            {% if completed %}
+            <h2 class="me-section-title">Последние заключения</h2>
+            <div class="me-appts">
+                {% for a in completed %}{% include 'partials/appointment_row.html' %}{% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <aside class="me-sticky">
+            <div class="me-card">
+                <div class="me-summary">
+                    <div class="me-summary__photo"><span class="me-avatar">{{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper }}</span></div>
+                    <div>
+                        <h3>{{ user.get_full_name|default:user.username }}</h3>
+                        <p>{{ user.email|default:"почта не указана" }}</p>
+                    </div>
+                </div>
+                <ul class="me-kv">
+                    <li><span>Телефон</span><b>{{ profile.phone|default:"—" }}</b></li>
+                    <li><span>Дата рождения</span><b>{% if profile.birth_date %}{{ profile.birth_date|date:"d.m.Y" }} ({{ profile.age }}){% else %}—{% endif %}</b></li>
+                    <li><span>Пол</span><b>{{ profile.get_gender_display|default:"—" }}</b></li>
+                    <li><span>Группа крови</span><b>{{ profile.get_blood_type_display|default:"—" }}</b></li>
+                    <li><span>Аллергии</span><b>{{ profile.allergies|default:"—" }}</b></li>
+                    <li><span>Хронические</span><b>{{ profile.chronic_conditions|default:"—" }}</b></li>
+                </ul>
+                {% if not profile.birth_date or not profile.phone %}
+                <div class="me-inline-alert me-inline-alert--info" style="margin:14px 0 0">Заполните медицинскую карту — врач увидит её перед приёмом.</div>
+                {% endif %}
+                <div style="display:grid;gap:10px;margin-top:18px">
+                    <a href="{% url 'profile_edit' %}" class="me-btn me-btn--primary me-btn--block"><i class="fas fa-pen"></i> Редактировать</a>
+                    <a href="{% url 'password_change' %}" class="me-btn me-btn--ghost me-btn--block">Сменить пароль</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

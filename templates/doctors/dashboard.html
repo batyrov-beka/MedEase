@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Панель врача — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Панель врача' %}
+
+<section class="me-page-body">
+    <div class="me-container">
+        <div class="me-card" style="margin-bottom:24px">
+            <div class="me-summary">
+                <div class="me-summary__photo">{% include 'partials/avatar.html' %}</div>
+                <div>
+                    <h3>{{ doctor.name }}</h3>
+                    <p>{{ doctor.title }} · сегодня {{ today|date:"j E, l" }}</p>
+                </div>
+                <a href="{{ doctor.get_absolute_url }}" class="me-btn me-btn--ghost me-btn--sm" style="margin-left:auto">Моя страница</a>
+            </div>
+        </div>
+
+        <div class="me-stats">
+            <div class="me-stat"><div class="me-stat__icon"><i class="fas fa-calendar-day"></i></div><div><b>{{ stats.today }}</b><small>пациентов сегодня</small></div></div>
+            <div class="me-stat"><div class="me-stat__icon me-stat__icon--warn"><i class="fas fa-hourglass-half"></i></div><div><b>{{ stats.pending }}</b><small>ждут подтверждения</small></div></div>
+            <div class="me-stat"><div class="me-stat__icon me-stat__icon--accent"><i class="fas fa-calendar-week"></i></div><div><b>{{ stats.upcoming }}</b><small>предстоящих записей</small></div></div>
+            <div class="me-stat"><div class="me-stat__icon me-stat__icon--ok"><i class="fas fa-circle-check"></i></div><div><b>{{ stats.completed }}</b><small>приёмов проведено</small></div></div>
+        </div>
+
+        <div class="me-chips me-chips--scroll">
+            {% for key, label, count in tabs %}
+            <a href="?tab={{ key }}" class="me-chip{% if tab == key %} is-active{% endif %}">{{ label }} <span class="me-chip__count">{{ count }}</span></a>
+            {% endfor %}
+        </div>
+
+        {% if appointments %}
+        <div class="me-appts">
+            {% for a in appointments %}{% include 'partials/appointment_row.html' with for_doctor=True %}{% endfor %}
+        </div>
+        {% else %}
+        <div class="me-empty">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Записей нет</h3>
+            <p>{% if tab == 'today' %}На сегодня пациентов нет.{% else %}В этом разделе пока пусто.{% endif %}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

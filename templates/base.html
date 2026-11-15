@@ -1,0 +1,214 @@
+{% load static %}<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MedEase — онлайн-запись к врачу{% endblock %}</title>
+    <meta name="description" content="{% block description %}MedEase — клиника в Оше: онлайн-запись к врачу, диагностика и консультации специалистов.{% endblock %}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f87c7'/><path d='M50 78 22 50a16 16 0 0 1 28-20 16 16 0 0 1 28 20Z' fill='white'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/medease.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'css/pages.css' %}?v=2">
+</head>
+<body>
+
+{% with path=request.path %}
+<header class="me-header" id="siteHeader">
+    <div class="me-container me-header__inner">
+        <a href="{% url 'home' %}" class="me-logo" aria-label="MedEase — на главную">
+            <span class="me-logo__mark"><i class="fas fa-heart-pulse"></i></span>
+            <span class="me-logo__text">Med<span>Ease</span></span>
+        </a>
+
+        <nav class="me-nav" aria-label="Основное меню">
+            <a href="{% url 'home' %}" class="{% if path == '/' %}is-active{% endif %}">Главная</a>
+            <a href="{% url 'doctors:list' %}" class="{% if path == '/doctors/' or '/doctors/' in path and 'dashboard' not in path %}is-active{% endif %}">Врачи</a>
+            <a href="{% url 'services' %}" class="{% if '/services/' in path %}is-active{% endif %}">Услуги</a>
+            <a href="{% url 'schedule' %}" class="{% if path == '/schedule/' %}is-active{% endif %}">Расписание</a>
+            <a href="{% url 'contact' %}" class="{% if path == '/contact/' %}is-active{% endif %}">Контакты</a>
+        </nav>
+
+        <div class="me-header__actions">
+            {% if user.is_authenticated %}
+                {% if user.doctor %}
+                    <a href="{% url 'doctors:dashboard' %}" class="me-link-btn{% if 'dashboard' in path %} is-current{% endif %}"><i class="fas fa-briefcase-medical"></i> Панель врача</a>
+                {% else %}
+                    <a href="{% url 'appointments:my' %}" class="me-link-btn"><i class="fa-regular fa-calendar-check"></i> Мои записи</a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="me-link-btn" title="Профиль"><i class="fa-regular fa-user"></i> {{ user.first_name|default:user.username }}</a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="me-link-btn" title="Выйти"><i class="fas fa-arrow-right-from-bracket"></i></button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="me-link-btn">Войти</a>
+                <a href="{% url 'doctors:list' %}" class="me-btn me-btn--primary me-btn--sm">Записаться</a>
+            {% endif %}
+        </div>
+
+        <button class="me-burger" id="burger" aria-label="Открыть меню" aria-controls="drawer" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
+
+<div class="me-drawer-backdrop" id="drawerBackdrop"></div>
+<nav class="me-drawer" id="drawer" aria-label="Мобильное меню">
+    <div class="me-drawer__head">
+        <a href="{% url 'home' %}" class="me-logo">
+            <span class="me-logo__mark"><i class="fas fa-heart-pulse"></i></span>
+            <span class="me-logo__text">Med<span>Ease</span></span>
+        </a>
+        <button class="me-burger" id="drawerClose" aria-label="Закрыть меню" style="display:grid;margin:0">
+            <i class="fas fa-xmark"></i>
+        </button>
+    </div>
+    <a href="{% url 'home' %}" class="{% if path == '/' %}is-active{% endif %}"><i class="fas fa-house"></i> Главная</a>
+    <a href="{% url 'doctors:list' %}"><i class="fas fa-user-doctor"></i> Врачи</a>
+    <a href="{% url 'services' %}" class="{% if '/services/' in path %}is-active{% endif %}"><i class="fas fa-stethoscope"></i> Услуги</a>
+    <a href="{% url 'schedule' %}" class="{% if path == '/schedule/' %}is-active{% endif %}"><i class="fas fa-calendar-days"></i> Расписание</a>
+    <a href="{% url 'contact' %}" class="{% if path == '/contact/' %}is-active{% endif %}"><i class="fas fa-envelope"></i> Контакты</a>
+    {% if user.is_authenticated %}
+        {% if user.doctor %}
+            <a href="{% url 'doctors:dashboard' %}"><i class="fas fa-briefcase-medical"></i> Панель врача</a>
+        {% endif %}
+        <a href="{% url 'appointments:my' %}"><i class="fas fa-calendar-check"></i> Мои записи</a>
+        <a href="{% url 'profile' %}"><i class="fas fa-user"></i> Профиль</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="me-link-btn"><i class="fas fa-arrow-right-from-bracket"></i> Выйти</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}"><i class="fas fa-arrow-right-to-bracket"></i> Войти</a>
+        <a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Регистрация</a>
+        <a href="{% url 'doctors:list' %}" class="me-btn me-btn--primary"><i class="fas fa-calendar-check"></i> Записаться к врачу</a>
+    {% endif %}
+</nav>
+{% endwith %}
+
+{% if messages %}
+<div class="me-messages" role="status">
+    {% for message in messages %}
+    <div class="me-alert me-alert--{{ message.tags|default:'info' }}">
+        <i class="fas {% if message.tags == 'success' %}fa-circle-check{% elif message.tags == 'error' or message.tags == 'warning' %}fa-circle-exclamation{% else %}fa-circle-info{% endif %}"></i>
+        <div>{{ message }}</div>
+        <button type="button" aria-label="Закрыть" data-dismiss><i class="fas fa-xmark"></i></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<main class="me-main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="me-footer">
+    <div class="me-container">
+        <div class="me-footer__grid">
+            <div>
+                <a href="{% url 'home' %}" class="me-logo">
+                    <span class="me-logo__mark"><i class="fas fa-heart-pulse"></i></span>
+                    <span class="me-logo__text">Med<span>Ease</span></span>
+                </a>
+                <p>Многопрофильная клиника в Оше. Онлайн-запись к врачу, диагностика и забота о вашем здоровье.</p>
+                <div class="me-socials">
+                    <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/{{ clinic.whatsapp }}" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4>Пациентам</h4>
+                <ul>
+                    <li><a href="{% url 'doctors:list' %}">Врачи</a></li>
+                    <li><a href="{% url 'services' %}">Направления</a></li>
+                    <li><a href="{% url 'schedule' %}">Расписание</a></li>
+                    <li><a href="{% url 'appointments:my' %}">Мои записи</a></li>
+                    <li><a href="{% url 'contact' %}">Консультация</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Контакты</h4>
+                <ul class="me-footer__contacts">
+                    <li><i class="fa-solid fa-phone"></i> <a href="tel:{{ clinic.phone_raw }}">{{ clinic.phone }}</a></li>
+                    <li><i class="fa-solid fa-location-dot"></i> {{ clinic.city }}</li>
+                    <li><i class="fa-solid fa-envelope"></i> <a href="mailto:{{ clinic.email }}">{{ clinic.email }}</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Режим работы</h4>
+                <ul class="me-footer__contacts">
+                    {% for days, hours in clinic.hours %}
+                    <li><i class="fa-regular fa-clock"></i> {{ days }}: {{ hours }}</li>
+                    {% endfor %}
+                </ul>
+                <p style="margin-top:14px;font-size:14px">При угрозе жизни звоните <a href="tel:103" style="color:#fff;font-weight:700">103</a></p>
+            </div>
+        </div>
+
+        <div class="me-footer__bottom">
+            <span>© {% now "Y" %} MedEase. Все права защищены.</span>
+            <span>Информация на сайте не заменяет консультацию врача.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Мобильное меню
+    const burger = document.getElementById('burger');
+    const setMenu = (open) => {
+        document.body.classList.toggle('menu-open', open);
+        burger.setAttribute('aria-expanded', String(open));
+    };
+    burger.addEventListener('click', () => setMenu(true));
+    document.getElementById('drawerClose').addEventListener('click', () => setMenu(false));
+    document.getElementById('drawerBackdrop').addEventListener('click', () => setMenu(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+    // Всплывающие сообщения: закрытие и автоскрытие
+    document.querySelectorAll('.me-alert').forEach((el) => {
+        const hide = () => { el.classList.add('is-hiding'); setTimeout(() => el.remove(), 300); };
+        el.querySelector('[data-dismiss]').addEventListener('click', hide);
+        setTimeout(hide, 6000);
+    });
+
+    // Подтверждение опасных действий
+    document.querySelectorAll('form[data-confirm]').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            if (!confirm(form.dataset.confirm)) e.preventDefault();
+        });
+    });
+
+    // Плавное появление блоков
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        items.forEach((el) => io.observe(el));
+    } else {
+        items.forEach((el) => el.classList.add('is-visible'));
+    }
+})();
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

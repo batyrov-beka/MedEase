@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Врачи клиники — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Наши врачи' subtitle='Найдите специалиста по направлению или по имени и запишитесь на свободное время.' %}
+
+<section class="me-page-body">
+    <div class="me-container">
+        <div class="me-toolbar">
+            <form method="get" class="me-search" role="search">
+                <i class="fas fa-magnifying-glass"></i>
+                <input type="search" name="q" value="{{ q }}" placeholder="Поиск врача или направления" aria-label="Поиск врача">
+                {% if current_specialty %}<input type="hidden" name="specialty" value="{{ current_specialty }}">{% endif %}
+                <button class="me-btn me-btn--primary me-btn--sm" type="submit">Найти</button>
+            </form>
+            <span style="color:var(--me-muted);font-size:15px">Найдено врачей: <b style="color:var(--me-ink)">{{ doctors|length }}</b></span>
+        </div>
+
+        {% if specialties %}
+        <div class="me-chips me-chips--scroll">
+            <a href="?{% if q %}q={{ q|urlencode }}{% endif %}" class="me-chip{% if not current_specialty %} is-active{% endif %}">Все направления</a>
+            {% for s in specialties %}
+            <a href="?specialty={{ s.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}" class="me-chip{% if current_specialty == s.slug %} is-active{% endif %}"><i class="fas {{ s.icon }}"></i> {{ s.name }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if doctors %}
+        <div class="me-doctors">
+            {% for doctor in doctors %}{% include 'partials/doctor_card.html' %}{% endfor %}
+        </div>
+        {% else %}
+        <div class="me-empty">
+            <i class="fas fa-user-doctor"></i>
+            <h3>Врачи не найдены</h3>
+            <p>Попробуйте изменить запрос или выберите другое направление.</p>
+            <a href="{% url 'doctors:list' %}" class="me-btn me-btn--ghost">Сбросить фильтры</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

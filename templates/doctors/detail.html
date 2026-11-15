@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}{{ doctor.name }} — {{ doctor.specialty.name }} — MedEase{% endblock %}
+{% block content %}
+{% url 'doctors:list' as list_url %}
+{% include 'partials/page_head.html' with title=doctor.name parent_url=list_url parent_title='Врачи' %}
+
+<section class="me-page-body">
+    <div class="me-container me-layout">
+        <div>
+            <div class="me-card">
+                <div class="me-doc-hero">
+                    <div class="me-doc-hero__photo">{% include 'partials/avatar.html' %}</div>
+                    <div>
+                        <a href="{{ doctor.specialty.get_absolute_url }}" class="me-doctor__spec"><i class="fas {{ doctor.specialty.icon }}"></i> {{ doctor.specialty.name }}</a>
+                        <h2>{{ doctor.name }}</h2>
+                        {% if doctor.position %}<p style="color:var(--me-muted)">{{ doctor.position }}</p>{% endif %}
+
+                        <div class="me-facts">
+                            <div class="me-fact"><small>Стаж</small><b>{{ doctor.experience_label }}</b></div>
+                            <div class="me-fact"><small>Приём</small><b>{{ doctor.slot_minutes }} мин</b></div>
+                            <div class="me-fact"><small>Стоимость</small><b>{% if doctor.price %}{{ doctor.price|intcomma }} сом{% else %}уточняйте{% endif %}</b></div>
+                        </div>
+
+                        <a href="{% url 'appointments:book' doctor.pk %}" class="me-btn me-btn--primary"><i class="fas fa-calendar-check"></i> Записаться на приём</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="me-card">
+                <div class="me-card__title"><h2>О враче</h2></div>
+                {% if doctor.bio %}
+                <p class="me-prose">{{ doctor.bio }}</p>
+                {% else %}
+                <p class="me-prose">{{ doctor.specialty.description|default:doctor.specialty.short_description }}</p>
+                {% endif %}
+            </div>
+
+            {% if doctor.education %}
+            <div class="me-card">
+                <div class="me-card__title"><h2>Образование</h2></div>
+                <p class="me-prose">{{ doctor.education }}</p>
+            </div>
+            {% endif %}
+
+            {% if related %}
+            <h2 class="me-section-title">Другие врачи направления</h2>
+            <div class="me-doctors">
+                {% for doctor in related %}{% include 'partials/doctor_card.html' %}{% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <aside class="me-sticky">
+            <div class="me-card">
+                <div class="me-card__title"><h3>График приёма</h3></div>
+                <ul class="me-week">
+                    {% for short, name, wh in week %}
+                    <li class="{% if forloop.counter0 == today_weekday %}is-today{% endif %}">
+                        <span>{{ name }}</span>
+                        {% if wh %}<b>{{ wh.start_time|time:"H:i" }}–{{ wh.end_time|time:"H:i" }}</b>{% else %}<span class="is-off">выходной</span>{% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% if next_day %}
+                <div class="me-inline-alert me-inline-alert--info" style="margin:18px 0 0">
+                    <i class="fas fa-calendar-check"></i> Ближайшая свободная дата: <b>{{ next_day|date:"j E, l" }}</b>
+                </div>
+                {% else %}
+                <div class="me-inline-alert" style="margin:18px 0 0">Свободного времени для онлайн-записи пока нет. Позвоните в регистратуру.</div>
+                {% endif %}
+                <a href="{% url 'appointments:book' doctor.pk %}{% if next_day %}?date={{ next_day|date:'Y-m-d' }}{% endif %}" class="me-btn me-btn--primary me-btn--block" style="margin-top:16px">Выбрать время</a>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

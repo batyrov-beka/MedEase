@@ -1,0 +1,16 @@
+{% load humanize %}
+<article class="me-doctor reveal">
+    <a href="{{ doctor.get_absolute_url }}" class="me-doctor__photo">{% include 'partials/avatar.html' %}</a>
+    <div class="me-doctor__body">
+        <span class="me-doctor__spec"><i class="fas {{ doctor.specialty.icon }}"></i> {{ doctor.specialty.name }}</span>
+        <h3><a href="{{ doctor.get_absolute_url }}">{{ doctor.name }}</a></h3>
+        <div class="me-doctor__meta">
+            {% if doctor.experience %}<span><i class="fas fa-award"></i>Стаж {{ doctor.experience_label }}</span>{% endif %}
+            {% if doctor.price %}<span><i class="fas fa-tag"></i>{{ doctor.price|intcomma }} сом</span>{% endif %}
+        </div>
+        <div class="me-doctor__actions">
+            <a href="{{ doctor.get_absolute_url }}" class="me-btn me-btn--ghost">Подробнее</a>
+            <a href="{% url 'appointments:book' doctor.pk %}" class="me-btn me-btn--primary">Записаться</a>
+        </div>
+    </div>
+</article>

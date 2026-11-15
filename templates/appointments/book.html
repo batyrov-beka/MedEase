@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Запись к врачу {{ doctor.name }} — MedEase{% endblock %}
+{% block content %}
+{% url 'doctors:list' as list_url %}
+{% include 'partials/page_head.html' with title='Запись на приём' parent_url=list_url parent_title='Врачи' %}
+
+<section class="me-page-body">
+    <div class="me-container">
+        {% if not days %}
+        <div class="me-empty">
+            <i class="fas fa-calendar-xmark"></i>
+            <h3>У врача пока нет графика для онлайн-записи</h3>
+            <p>Позвоните в регистратуру — мы подберём время приёма.</p>
+            <a href="tel:{{ clinic.phone_raw }}" class="me-btn me-btn--primary"><i class="fas fa-phone"></i> {{ clinic.phone }}</a>
+        </div>
+        {% else %}
+        <form method="post" class="me-layout" id="bookingForm" novalidate>
+            {% csrf_token %}
+            <div class="me-card">
+                {% include 'partials/form_errors.html' %}
+
+                <div class="me-booking-block">
+                    <div class="me-step-label"><span>1</span> Выберите дату</div>
+                    <div class="me-days">
+                        {% for d in days %}
+                        <a href="?date={{ d.date|date:'Y-m-d' }}" class="me-day{% if d.date == selected_date %} is-active{% endif %}{% if not d.free %} is-full{% endif %}">
+                            <small>{{ d.date|date:"D" }}</small>
+                            <b>{{ d.date|date:"j" }}</b>
+                            <small>{{ d.date|date:"M" }}</small>
+                            <span>{% if d.free %}своб. {{ d.free }}{% else %}занято{% endif %}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="me-booking-block">
+                    <div class="me-step-label"><span>2</span> Выберите время — {{ selected_date|date:"j E, l" }}</div>
+                    <input type="hidden" name="date" value="{{ selected_date|date:'Y-m-d' }}">
+                    {% if slots %}
+                    <div class="me-slots">
+                        {% for s in slots %}
+                        {% with t=s.time|time:"H:i" %}
+                        <label class="me-slot">
+                            <input type="radio" name="time" value="{{ t }}" {% if not s.free %}disabled{% endif %} {% if t == selected_time %}checked{% endif %}>
+                            <span>{{ t }}</span>
+                        </label>
+                        {% endwith %}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p style="color:var(--me-muted)">На этот день свободного времени не осталось — выберите другую дату.</p>
+                    {% endif %}
+                    {% for e in form.time.errors %}<small class="me-error">{{ e }}</small>{% endfor %}
+                </div>
+
+                <div class="me-booking-block">
+                    <div class="me-step-label"><span>3</span> Данные пациента</div>
+                    <div class="me-form">
+                        <div class="me-form-row">
+                            {% include 'partials/field.html' with field=form.patient_name %}
+                            {% include 'partials/field.html' with field=form.phone %}
+                        </div>
+                        {% include 'partials/field.html' with field=form.reason %}
+                    </div>
+                </div>
+            </div>
+
+            <aside class="me-sticky">
+                <div class="me-card">
+                    <div class="me-summary">
+                        <div class="me-summary__photo">{% include 'partials/avatar.html' %}</div>
+                        <div>
+                            <h3>{{ doctor.name }}</h3>
+                            <p>{{ doctor.title }}</p>
+                        </div>
+                    </div>
+                    <ul class="me-kv">
+                        <li><span>Дата</span><b>{{ selected_date|date:"j E" }}</b></li>
+                        <li><span>Время</span><b id="summaryTime">{{ selected_time|default:"не выбрано" }}</b></li>
+                        <li><span>Длительность</span><b>{{ doctor.slot_minutes }} мин</b></li>
+                        {% if doctor.price %}<li><span>Стоимость</span><b>{{ doctor.price|intcomma }} сом</b></li>{% endif %}
+                    </ul>
+                    <button type="submit" class="me-btn me-btn--primary me-btn--block" id="submitBtn" style="margin-top:18px" {% if not selected_time %}disabled{% endif %}>
+                        <i class="fas fa-calendar-check"></i> Записаться
+                    </button>
+                    <small class="me-help" style="text-align:center">Запись можно отменить в разделе «Мои записи».</small>
+                </div>
+            </aside>
+        </form>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    const form = document.getElementById('bookingForm');
+    if (!form) return;
+    const out = document.getElementById('summaryTime');
+    const btn = document.getElementById('submitBtn');
+    form.querySelectorAll('input[name="time"]').forEach((r) => {
+        r.addEventListener('change', () => {
+            out.textContent = r.value;
+            btn.disabled = false;
+        });
+    });
+    form.addEventListener('submit', () => { btn.disabled = true; btn.innerHTML = 'Отправка…'; });
+})();
+</script>
+{% endblock %}

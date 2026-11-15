@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Направления и услуги — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Направления' subtitle='Выберите направление, чтобы узнать подробнее и записаться к специалисту.' %}
+
+<section class="me-page-body">
+    <div class="me-container">
+        <div class="me-services">
+            {% for s in specialties %}
+            <a href="{{ s.get_absolute_url }}" class="me-service reveal">
+                {% if s.image %}
+                <div class="me-service__img">
+                    <img src="{% static s.image %}" alt="{{ s.name }}" loading="lazy">
+                    <span class="me-service__tag"><i class="fas {{ s.icon }}"></i></span>
+                </div>
+                {% else %}
+                <div class="me-service__img me-service__img--icon"><i class="fas {{ s.icon }}"></i></div>
+                {% endif %}
+                <div class="me-service__body">
+                    <h3>{{ s.name }}</h3>
+                    <div class="me-service__count">
+                        {% if s.doctor_count %}<i class="fas fa-user-doctor"></i> Врачей: {{ s.doctor_count }}{% else %}Запись через администратора{% endif %}
+                    </div>
+                    <p>{{ s.short_description }}</p>
+                    <span class="me-service__link">Подробнее <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            {% empty %}
+            <div class="me-empty"><i class="fas fa-stethoscope"></i><h3>Направления пока не добавлены</h3></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Расписание врачей — MedEase{% endblock %}
+{% block content %}
+{% include 'partials/page_head.html' with title='Расписание врачей' subtitle='Дни и часы приёма специалистов. Свободное время на конкретную дату видно при записи.' %}
+
+<section class="me-page-body">
+    <div class="me-container">
+        {% if specialties %}
+        <div class="me-chips me-chips--scroll">
+            <a href="{% url 'schedule' %}" class="me-chip{% if not current_specialty %} is-active{% endif %}">Все</a>
+            {% for s in specialties %}
+            <a href="?specialty={{ s.slug }}" class="me-chip{% if current_specialty == s.slug %} is-active{% endif %}"><i class="fas {{ s.icon }}"></i> {{ s.name }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if rows %}
+        <div class="me-table-wrap">
+            <table class="me-table">
+                <thead>
+                    <tr>
+                        <th>Врач</th>
+                        {% for d in weekdays %}<th>{{ d }}</th>{% endfor %}
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor, days in rows %}
+                    <tr>
+                        <td>
+                            <a href="{{ doctor.get_absolute_url }}" class="me-table__doc">
+                                <span class="me-summary__photo">{% include 'partials/avatar.html' %}</span>
+                                <span><b>{{ doctor.name }}</b><small>{{ doctor.specialty.name }}</small></span>
+                            </a>
+                        </td>
+                        {% for wh in days %}
+                        <td>{% if wh %}<span class="me-hours-pill">{{ wh.start_time|time:"H:i" }}–{{ wh.end_time|time:"H:i" }}</span>{% else %}<span class="me-off">—</span>{% endif %}</td>
+                        {% endfor %}
+                        <td><a href="{% url 'appointments:book' doctor.pk %}" class="me-btn me-btn--primary me-btn--xs">Записаться</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="me-empty"><i class="fas fa-calendar-xmark"></i><h3>Расписание пока не заполнено</h3></div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

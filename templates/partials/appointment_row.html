@@ -1,0 +1,42 @@
+<article class="me-appt{% if not a.is_active %} me-appt--muted{% endif %}">
+    <div class="me-appt__date">
+        <b>{{ a.date|date:"j" }}</b>
+        <small>{{ a.date|date:"M" }}</small>
+    </div>
+    <div class="me-appt__info">
+        <h4><a href="{{ a.get_absolute_url }}">{% if for_doctor %}{{ a.patient_name }}{% else %}{{ a.doctor.name }}{% endif %}</a></h4>
+        <p>
+            <i class="fa-regular fa-clock"></i> {{ a.date|date:"l" }}, {{ a.time|time:"H:i" }}
+            {% if for_doctor %}{% if a.phone %} · <a href="tel:{{ a.phone }}">{{ a.phone }}</a>{% endif %}
+            {% else %} · {{ a.doctor.specialty.name }}{% endif %}
+        </p>
+        {% if for_doctor and a.reason %}<p style="margin-top:4px">{{ a.reason|truncatechars:110 }}</p>{% endif %}
+        {% include 'partials/status.html' %}
+    </div>
+    <div class="me-appt__side">
+        {% if for_doctor %}
+            {% if a.status == 'pending' %}
+            <form method="post" action="{% url 'appointments:status' a.pk %}">{% csrf_token %}
+                <input type="hidden" name="status" value="confirmed"><input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <button class="me-btn me-btn--primary me-btn--xs" type="submit"><i class="fas fa-check"></i> Подтвердить</button>
+            </form>
+            {% endif %}
+            {% if a.is_active %}
+            <a href="{{ a.get_absolute_url }}" class="me-btn me-btn--success me-btn--xs"><i class="fas fa-notes-medical"></i> Принять</a>
+            <form method="post" action="{% url 'appointments:status' a.pk %}" data-confirm="Отменить запись пациента {{ a.patient_name }}?">{% csrf_token %}
+                <input type="hidden" name="status" value="cancelled"><input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <button class="me-btn me-btn--danger me-btn--xs" type="submit">Отменить</button>
+            </form>
+            {% else %}
+            <a href="{{ a.get_absolute_url }}" class="me-btn me-btn--ghost me-btn--xs">Открыть</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ a.get_absolute_url }}" class="me-btn me-btn--ghost me-btn--xs">Подробнее</a>
+            {% if a.can_cancel %}
+            <form method="post" action="{% url 'appointments:cancel' a.pk %}" data-confirm="Отменить запись к врачу {{ a.doctor.name }}?">{% csrf_token %}
+                <button class="me-btn me-btn--danger me-btn--xs" type="submit">Отменить</button>
+            </form>
+            {% endif %}
+        {% endif %}
+    </div>
+</article>
